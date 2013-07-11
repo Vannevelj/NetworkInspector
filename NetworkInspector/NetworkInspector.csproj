@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Interfaces\IStatistics.cs" />
     <Compile Include="Models\Packet.cs" />
     <Compile Include="Models\Statistics.cs" />
-    <Compile Include="Models\StatisticsFactory.cs" />
+    <Compile Include="Network\StatisticsFactory.cs" />
     <Compile Include="Network\Utilities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

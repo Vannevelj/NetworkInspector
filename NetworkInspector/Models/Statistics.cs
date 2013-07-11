@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using NetworkInspector.Models.Interfaces;
+using NetworkInspector.Network;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NetworkInspector.Models {
-    public sealed class Statistics {
+    public class Statistics : IStatistics {
         public Statistics(string name) {
             NetworkInterface = name;
             LatestDownTransfers = new Queue<float>(3);

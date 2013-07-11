@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using NetworkInspector.Models;
+using System.Collections.Generic;
 
-namespace NetworkInspector.Models {
+namespace NetworkInspector.Network {
     public static class StatisticsFactory {
         private static Queue<float> _latestDownTransfers = new Queue<float>();
         private static Queue<float> _latestUpTransfers = new Queue<float>();
