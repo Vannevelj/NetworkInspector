@@ -1,4 +1,5 @@
 ﻿using NetworkInspector.Models;
+using NetworkInspector.Models.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace NetworkInspector.Network {
         // <summary>
         // Returns statistics about the given network interface
         // </summary>
-        public static Statistics GetNetworkStatistics(string interfaceName) {
+        public static IStatistics GetNetworkStatistics(string interfaceName) {
             var stats = StatisticsFactory.CreateStatistics(interfaceName);
 
             var dataSentCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", interfaceName);

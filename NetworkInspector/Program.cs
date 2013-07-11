@@ -18,7 +18,7 @@ namespace NetworkInspector {
             Console.WriteLine("Selected network interface:\n" + instances[choice] + "\n\n");
 
             while (true) {
-                IStatistics stats = Utilities.GetNetworkStatistics(instances[choice]);
+                var stats = Utilities.GetNetworkStatistics(instances[choice]);
                 Console.WriteLine("Download speed: " + stats.DownloadSpeed + " KBytes/s");
                 Console.WriteLine("Upload speed: " + stats.UploadSpeed + " KBytes/s");
                 Console.WriteLine("--------------------------------------------------------------\n\n");
