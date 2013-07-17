@@ -1,5 +1,4 @@
-﻿using NetworkInspector.Models;
-using NetworkInspector.Models.Interfaces;
+﻿using NetworkInspector.Models.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -41,6 +40,11 @@ namespace NetworkInspector.Network {
         // </summary>
         public static IList<string> GetNetworkInterfaces() {
             return new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList();
+        }
+
+        public static void Sniff() {
+            var tracer = new PacketTracer();
+            tracer.Capture();
         }
     }
 }

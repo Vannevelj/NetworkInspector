@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Interfaces\IStatistics.cs" />
-    <Compile Include="Models\Packet.cs" />
+    <Compile Include="Models\Packets\IPHeader.cs" />
+    <Compile Include="Models\Packets\TCPHeader.cs" />
+    <Compile Include="Models\Packets\UDPHeader.cs" />
     <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Network\PacketTracer.cs" />
     <Compile Include="Network\StatisticsFactory.cs" />
     <Compile Include="Network\Utilities.cs" />
     <Compile Include="Program.cs" />
