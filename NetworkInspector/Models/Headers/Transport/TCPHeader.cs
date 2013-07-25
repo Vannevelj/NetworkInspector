@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NetworkInspector.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace NetworkInspector.Models {
-    public class TCPHeader {
+namespace NetworkInspector.Models.Headers.Transport {
+    public class TCPHeader : IHeader {
         private ushort _usSourcePort;  // 16 bits
 
         private ushort _usDestinationPort; // 16 bits
@@ -138,6 +139,12 @@ namespace NetworkInspector.Models {
         public int MessageLength {
             get {
                 return Convert.ToInt32(_usMessageLength);
+            }
+        }
+
+        public string ProtocolName {
+            get {
+                return "TCP";
             }
         }
     }

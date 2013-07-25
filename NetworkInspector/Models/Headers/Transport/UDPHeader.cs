@@ -1,9 +1,10 @@
-﻿using System;
+﻿using NetworkInspector.Models.Interfaces;
+using System;
 using System.IO;
 using System.Net;
 
-namespace NetworkInspector.Models.Packets {
-    public class UDPHeader {
+namespace NetworkInspector.Models.Headers.Transport {
+    public class UDPHeader : IHeader {
         private ushort _usSourcePort; // 16 bits
 
         private ushort _usDestinationPort; // 16 bits
@@ -53,6 +54,12 @@ namespace NetworkInspector.Models.Packets {
         public byte[] Data {
             get {
                 return _byData;
+            }
+        }
+
+        public string ProtocolName {
+            get {
+                return "UDP";
             }
         }
     }

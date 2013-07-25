@@ -48,5 +48,13 @@ namespace NetworkInspector.Network {
 
             stats.LatestDownTransfers = _latestDownTransfers;
         }
+
+        // <summary>
+        // Empties the list with recent transfer rates, effectively cleaning the slate
+        // </summary>
+        public static void Stop() {
+            _latestDownTransfers = new Queue<float>();
+            _latestUpTransfers = new Queue<float>();
+        }
     }
 }

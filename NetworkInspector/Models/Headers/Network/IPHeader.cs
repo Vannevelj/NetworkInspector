@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NetworkInspector.Models.Interfaces;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
-namespace NetworkInspector.Models {
-    public class IPHeader {
+namespace NetworkInspector.Models.Headers.Network {
+    public class IPHeader : IHeader {
         private byte _byVersionAndHeaderLength; // 8 bits
 
         private byte _byDiffServices; // 8 bits
@@ -149,6 +150,12 @@ namespace NetworkInspector.Models {
 
         public byte[] Data {
             get { return _byData; }
+        }
+
+        public string ProtocolName {
+            get {
+                return "IP";
+            }
         }
     }
 }

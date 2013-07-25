@@ -36,15 +36,17 @@ namespace NetworkInspector.Network {
         }
 
         // <summary>
+        // Resets the list of recent transfer rates
+        // </summary>
+        public static void StopStatistics() {
+            StatisticsFactory.Stop();
+        }
+
+        // <summary>
         // Returns a list of all available network interfaces
         // </summary>
         public static IList<string> GetNetworkInterfaces() {
             return new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList();
-        }
-
-        public static void Sniff() {
-            var tracer = new PacketTracer();
-            tracer.Capture();
         }
     }
 }
