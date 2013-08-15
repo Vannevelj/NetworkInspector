@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NetworkInspector.Models.Interfaces {
+namespace NetworkInspector.Models {
     public interface IStatistics {
         string NetworkInterface { get; }
 
@@ -15,5 +15,9 @@ namespace NetworkInspector.Models.Interfaces {
         Queue<float> LatestDownTransfers { get; }
 
         Queue<float> LatestUpTransfers { get; }
+
+        void AddSentData(float d);
+
+        void AddReceivedData(float d);
     }
 }

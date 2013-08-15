@@ -1,7 +1,7 @@
 ﻿using NetworkInspector.Models.Packets;
 
-namespace NetworkInspector.Models.Interfaces {
-    public interface IObserver {
+namespace NetworkInspector.Network.PacketTracingUtilities {
+    public interface IPacketTracerObserver {
         void IncomingPacket(TCPPacket tcp);
 
         void IncomingPacket(UDPPacket udp);

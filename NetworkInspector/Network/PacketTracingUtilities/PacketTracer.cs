@@ -1,6 +1,5 @@
 ﻿using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
-using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,9 @@ using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.Sockets;
 
-namespace NetworkInspector.Network {
-    public class PacketTracer : ISubject {
-        private ICollection<IObserver> _observers = new Collection<IObserver>();
+namespace NetworkInspector.Network.PacketTracingUtilities {
+    public class PacketTracer : IPacketTracerSubject {
+        private ICollection<IPacketTracerObserver> _observers = new Collection<IPacketTracerObserver>();
         private bool _running;
         private byte[] _data = new byte[4096];
 
@@ -63,7 +62,7 @@ namespace NetworkInspector.Network {
             }
         }
 
-        public void AddObserver(IObserver obs) {
+        public void AddObserver(IPacketTracerObserver obs) {
             _observers.Add(obs);
         }
 
