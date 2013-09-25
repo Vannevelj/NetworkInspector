@@ -1,7 +1,6 @@
 ﻿using NetworkInspector.Models.Headers.Application;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
-using NetworkInspector.Models.Interfaces;
 using System;
 
 namespace NetworkInspector.Models.Packets {

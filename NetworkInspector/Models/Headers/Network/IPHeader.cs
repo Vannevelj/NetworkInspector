@@ -1,4 +1,4 @@
-﻿using NetworkInspector.Models.Interfaces;
+﻿using NetworkInspector.Models.Headers.Transport;
 using System;
 using System.IO;
 using System.Net;
