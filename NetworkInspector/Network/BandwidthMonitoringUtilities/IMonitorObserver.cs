@@ -2,6 +2,6 @@
 
 namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
     public interface IMonitorObserver {
-        void TransferUpdate(IStatistics stats);
+        void TransferUpdate(INetworkStatistics stats);
     }
 }

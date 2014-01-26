@@ -4,6 +4,6 @@ namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
     public interface IMonitorSubject {
         void AddObserver(IMonitorObserver obs);
 
-        void NotifyObservers(IStatistics stats);
+        void NotifyObservers(INetworkStatistics stats);
     }
 }

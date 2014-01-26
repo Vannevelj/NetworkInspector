@@ -62,7 +62,7 @@ namespace NetworkInspector.Network {
                 case 2: {
                         var monitor = new BandwithMonitor();
                         monitor.AddObserver(this);
-                        monitor.GetNetworkStatistics(instances[choice]);
+                        monitor.UpdateNetworkStatistics(monitor.GetNetworkStatistics(instances[choice]));
                     }
                     break;
 
@@ -104,11 +104,9 @@ namespace NetworkInspector.Network {
             Console.WriteLine("\n\n");
         }
 
-        public void TransferUpdate(IStatistics stats) {
-            Console.WriteLine("Download speed:\t\t{0} KBytes/s", (stats.DownloadSpeed / 1024).ToString("0.000"));
-            Console.WriteLine("Upload speed:\t\t{0} KBytes/s", (stats.UploadSpeed / 1024).ToString("0.000"));
-            Console.WriteLine("Total downloaded:\t{0} Kbytes", (stats.DataReceived / 1024).ToString("0.000"));
-            Console.WriteLine("Total uploaded:\t\t{0} Kbytes", (stats.DataSent / 1024).ToString("0.000"));
+        public void TransferUpdate(INetworkStatistics stats) {
+            Console.WriteLine("Download speed:\t\t{0} KBytes/s", stats.DownloadSpeed.KiloBytesPerSecond.ToString("0.000"));
+            Console.WriteLine("Upload speed:\t\t{0} KBytes/s", stats.UploadSpeed.KiloBytesPerSecond.ToString("0.000"));
             Console.WriteLine("--------------------------------------------------------------\n\n");
         }
     }

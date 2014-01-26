@@ -5,25 +5,22 @@ using System.Threading;
 
 namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
     public class BandwithMonitor : IMonitorSubject {
-        private List<IMonitorObserver> _observers = new List<IMonitorObserver>();
-        private IDictionary<string, Statistics> _interfaces = new Dictionary<string, Statistics>();
-        private bool running = true;
+        private readonly List<IMonitorObserver> _observers = new List<IMonitorObserver>();
+        private bool _running = true;
 
-        public BandwithMonitor() {
-            foreach (var _interface in Utilities.GetNetworkInterfaces()) {
-                _interfaces.Add(_interface, new Statistics(_interface));
-            }
+
+        public INetworkStatistics GetNetworkStatistics(string networkName)
+        {
+            return new NetworkStatistics(networkName);
         }
 
         // <summary>
         // Starts the monitoring of network activity
         // </summary>
-        public void GetNetworkStatistics(string interfaceName) {
-            while (running) {
-                var networkStats = _interfaces[interfaceName];
-
-                var dataSentCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", interfaceName);
-                var dataReceivedCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", interfaceName);
+        public void UpdateNetworkStatistics(INetworkStatistics stats) {
+            while (_running) {
+                var dataSentCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", stats.NetworkInterface.Description.Replace('(', '[').Replace(')', ']'));
+                var dataReceivedCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", stats.NetworkInterface.Description.Replace('(', '[').Replace(')', ']'));
 
                 var initSent = dataSentCounter.NextValue();
                 var initReceived = dataReceivedCounter.NextValue();
@@ -32,25 +29,25 @@ namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
                 var sentSum = dataSentCounter.NextValue() - initSent;
                 var receiveSum = dataReceivedCounter.NextValue() - initReceived;
 
-                networkStats.AddSentData(sentSum);
-                networkStats.AddReceivedData(receiveSum);
+                stats.AddSentData(sentSum);
+                stats.AddReceivedData(receiveSum);
 
-                NotifyObservers(networkStats);
+                NotifyObservers(stats);
             }
         }
 
         // <summary>
         // Stops the monitoring of network activity
         // </summary>
-        public bool Stop() {
-            return running = true;
+        public void Stop() {
+            _running = false;
         }
 
         public void AddObserver(IMonitorObserver obs) {
             _observers.Add(obs);
         }
 
-        public void NotifyObservers(IStatistics stats) {
+        public void NotifyObservers(INetworkStatistics stats) {
             foreach (var obs in _observers) {
                 obs.TransferUpdate(stats);
             }

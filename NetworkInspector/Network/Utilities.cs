@@ -14,7 +14,7 @@ namespace NetworkInspector.Network {
         // Returns a list of all available network interfaces
         // </summary>
         public static IList<string> GetNetworkInterfaces() {
-            return new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList();
+            return NetworkInterface.GetAllNetworkInterfaces().Select(x => x.Description).ToList();
         }
 
         // <summary>

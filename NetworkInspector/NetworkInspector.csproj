@@ -44,8 +44,9 @@
     <Compile Include="Extensions\Helpers.cs" />
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
+    <Compile Include="Models\TransferRate.cs" />
     <Compile Include="Network\PacketTracingUtilities\IPacketTracerObserver.cs" />
-    <Compile Include="Models\IStatistics.cs" />
+    <Compile Include="Models\INetworkStatistics.cs" />
     <Compile Include="Network\PacketTracingUtilities\IPacketTracerSubject.cs" />
     <Compile Include="Models\Headers\Application\DNSHeader.cs" />
     <Compile Include="Models\Headers\Network\IPHeader.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Models\Packets\TCPPacket.cs" />
     <Compile Include="Models\Headers\Transport\UDPHeader.cs" />
     <Compile Include="Models\Packets\UDPPacket.cs" />
-    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Models\NetworkStatistics.cs" />
     <Compile Include="Network\PacketTracingUtilities\PacketTracer.cs" />
     <Compile Include="Network\Program.cs" />
     <Compile Include="Network\BandwidthMonitoringUtilities\BandwithMonitor.cs" />

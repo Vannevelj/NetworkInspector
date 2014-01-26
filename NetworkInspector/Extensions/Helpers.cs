@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NetworkInspector.Extensions {
     public static class Helpers {
-        public static string ToTransferRate(this float input) {
-            if (input < 1028) {
-                return input.ToString("0.00") + " Bytes/Second";
-            }
 
-            if (input < (1028 * 1028)) {
-                return (input / 1028).ToString("0.00") + " KBytes/Second";
-            }
-
-            if (input < (1028 * 1028)) {
-                return (input / 1028 / 1028).ToString("0.00") + " MBytes/Second";
-            }
-
-            if (input < (1028 * 1028 * 1028)) {
-                return (input / 1028 / 1028 / 1028).ToString("0.00") + " GBytes/Second";
-            }
-
-            throw new ArgumentOutOfRangeException("input");
+        /// <summary>
+        /// This extension replaces parantheses '(' and ')' with brackets '[' and ']'.
+        /// This is done because <code>NetworkInterface.GetAllNetworkInterfaces()</code>
+        /// returns a different version than <code>new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList()</code>
+        /// </summary>
+        /// <param name="this">String to replace the brackets on</param>
+        /// <returns></returns>
+        public static string ReplaceOptionalBrackets(this string @this)
+        {
+            return @this.Replace('(', '[').Replace(')', ']');
         }
     }
 }

@@ -7,3 +7,9 @@ C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\obj\Debug\Net
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.exe.config
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.exe
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.exe.config
+D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.exe
+D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.exe
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojResolveAssemblyReference.cache
