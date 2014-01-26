@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetworkInspector.Extensions {
-    public static class Helpers {
-
+﻿namespace NetworkInspector.Extensions
+{
+    public static class Helpers
+    {
         /// <summary>
-        /// This extension replaces parantheses '(' and ')' with brackets '[' and ']'.
-        /// This is done because <code>NetworkInterface.GetAllNetworkInterfaces()</code>
-        /// returns a different version than <code>new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList()</code>
+        ///     This extension replaces parantheses '(' and ')' with brackets '[' and ']'.
+        ///     This is done because <code>NetworkInterface.GetAllNetworkInterfaces()</code>
+        ///     returns a different version than
+        ///     <code>new PerformanceCounterCategory("Network Interface").GetInstanceNames().ToList()</code>
         /// </summary>
         /// <param name="this">String to replace the brackets on</param>
         /// <returns></returns>

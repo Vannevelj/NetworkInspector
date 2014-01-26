@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 using NetworkInspector.Network;
 
-namespace NetworkInspector.Models {
+namespace NetworkInspector.Models
+{
     public class NetworkStatistics : INetworkStatistics
     {
         private readonly TransferRate _downTransferRate;
@@ -11,7 +10,8 @@ namespace NetworkInspector.Models {
         private readonly TransferRate _totalDownTransferRate;
         private readonly TransferRate _totalUpTransferRate;
 
-        public NetworkStatistics(string name) {
+        public NetworkStatistics(string name)
+        {
             NetworkInterface = Utilities.GetInterfaceInformation(name);
             _downTransferRate = new TransferRate();
             _upTransferRate = new TransferRate();
@@ -19,38 +19,24 @@ namespace NetworkInspector.Models {
             _totalUpTransferRate = new TransferRate();
         }
 
-        // <summary>
-        // Holds the name of the selected network interface
-        // </summary>
         public NetworkInterface NetworkInterface { get; set; }
 
-        // <summary>
-        // Contains the total data sent since the start of capturing in bytes
-        // </summary>
-        public TransferRate DataSent
+        public TransferRate TotalDataSent
         {
             get { return _totalUpTransferRate; }
         }
 
-        // <summary>
-        // Contains the total data received since the start of capturing in bytes
-        // </summary>
-        public TransferRate DataReceived
+
+        public TransferRate TotalDataReceived
         {
             get { return _totalDownTransferRate; }
         }
 
-        // <summary>
-        // Returns the upload speed in Bytes / Second
-        // </summary>
         public TransferRate UploadSpeed
         {
             get { return _upTransferRate; }
         }
 
-        // <summary>
-        // Returns the download speed in Bytes / Second
-        // </summary>
         public TransferRate DownloadSpeed
         {
             get { return _downTransferRate; }
@@ -59,14 +45,16 @@ namespace NetworkInspector.Models {
         // <summary>
         // Adds a value to the current running statistics summary's upload list
         // </summary>
-        public void AddSentData(float d) {
+        public void AddSentData(float d)
+        {
             _upTransferRate.AddDataPoint(d);
         }
 
         // <summary>
         // Adds a value to the current running statistics summary's download list
         // </summary>
-        public void AddReceivedData(float d) {
+        public void AddReceivedData(float d)
+        {
             _downTransferRate.AddDataPoint(d);
         }
     }

@@ -1,14 +1,20 @@
-﻿using NetworkInspector.Models.Headers.Network;
+﻿using System;
+using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
-using System;
 
-namespace NetworkInspector.Models.Packets {
-    public class TCPPacket : Packet {
+namespace NetworkInspector.Models.Packets
+{
+    public class TCPPacket : Packet
+    {
         public TCPHeader TransportHeader { get; set; }
 
-        public override string PacketType { get { return "TCP"; } }
+        public override Protocol PacketType
+        {
+            get { return Protocol.TCP; }
+        }
 
-        public TCPPacket(IPHeader ip, TCPHeader tcp) {
+        public TCPPacket(IPHeader ip, TCPHeader tcp)
+        {
             NetworkHeader = ip;
             TransportHeader = tcp;
             Received = DateTime.Now;

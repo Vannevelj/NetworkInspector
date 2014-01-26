@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 
-namespace NetworkInspector.Models {
-    public interface INetworkStatistics {
+namespace NetworkInspector.Models
+{
+    public interface INetworkStatistics
+    {
         NetworkInterface NetworkInterface { get; }
 
-        TransferRate DataSent { get; }
+        TransferRate TotalDataSent { get; }
 
-        TransferRate DataReceived { get; }
+        TransferRate TotalDataReceived { get; }
 
         TransferRate UploadSpeed { get; }
 

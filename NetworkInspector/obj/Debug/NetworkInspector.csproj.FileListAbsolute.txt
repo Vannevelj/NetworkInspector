@@ -13,3 +13,5 @@ D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
 D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.exe
 D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.pdb
 D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojResolveAssemblyReference.cache
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.dll
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.xml

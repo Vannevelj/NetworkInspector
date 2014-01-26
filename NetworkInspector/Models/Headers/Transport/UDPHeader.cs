@@ -1,20 +1,24 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using NetworkInspector.Models.Packets;
 
-namespace NetworkInspector.Models.Headers.Transport {
-    public class UDPHeader : IHeader {
-        private ushort _usSourcePort; // 16 bits
+namespace NetworkInspector.Models.Headers.Transport
+{
+    public class UDPHeader : IHeader
+    {
+        private readonly ushort _usSourcePort; // 16 bits
 
-        private ushort _usDestinationPort; // 16 bits
+        private readonly ushort _usDestinationPort; // 16 bits
 
-        private ushort _usLength; // 16 bits
+        private readonly ushort _usLength; // 16 bits
 
-        private short _sChecksum; // 16 bits
+        private readonly short _sChecksum; // 16 bits
 
-        private byte[] _byData = new byte[4096];
+        private readonly byte[] _byData = new byte[4096];
 
-        public UDPHeader(byte[] buffer, int size) {
+        public UDPHeader(byte[] buffer, int size)
+        {
             var stream = new MemoryStream(buffer, 0, size);
             var reader = new BinaryReader(stream);
 
@@ -26,40 +30,39 @@ namespace NetworkInspector.Models.Headers.Transport {
             Array.Copy(buffer, 8, _byData, 0, size - 8);
         }
 
-        public int SourcePort {
-            get {
-                return Convert.ToInt32(_usSourcePort);
-            }
+        public int SourcePort
+        {
+            get { return Convert.ToInt32(_usSourcePort); }
         }
 
-        public int DestinationPort {
-            get {
-                return Convert.ToInt32(_usDestinationPort);
-            }
+        public int DestinationPort
+        {
+            get { return Convert.ToInt32(_usDestinationPort); }
         }
 
-        public int Length {
-            get {
-                return Convert.ToInt32(_usLength);
-            }
+        public int Length
+        {
+            get { return Convert.ToInt32(_usLength); }
         }
 
-        public string Checksum {
-            get {
-                return string.Format("0x{0:x2}", _sChecksum);
-            }
+        public string Checksum
+        {
+            get { return string.Format("0x{0:x2}", _sChecksum); }
         }
 
-        public byte[] Data {
-            get {
-                return _byData;
-            }
+        public byte[] Data
+        {
+            get { return _byData; }
         }
 
-        public string ProtocolName {
-            get {
-                return "UDP";
-            }
+        public Protocol ProtocolName
+        {
+            get { return Protocol.UDP; }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("UDP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort, Length);
         }
     }
 }

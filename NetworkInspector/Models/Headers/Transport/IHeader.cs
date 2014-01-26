@@ -1,5 +1,9 @@
-﻿namespace NetworkInspector.Models.Headers.Transport {
-    public interface IHeader {
-        string ProtocolName { get; }
+﻿using NetworkInspector.Models.Packets;
+
+namespace NetworkInspector.Models.Headers.Transport
+{
+    public interface IHeader
+    {
+        Protocol ProtocolName { get; }
     }
 }

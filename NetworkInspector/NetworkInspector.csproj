@@ -11,6 +11,8 @@
     <AssemblyName>NetworkInspector</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,19 +50,17 @@
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />
-    <Compile Include="Network\PacketTracingUtilities\IPacketTracerObserver.cs" />
+    <Compile Include="Network\BandwidthMonitoringUtilities\NetworkStatisticsEventArgs.cs" />
     <Compile Include="Models\INetworkStatistics.cs" />
-    <Compile Include="Network\PacketTracingUtilities\IPacketTracerSubject.cs" />
     <Compile Include="Models\Headers\Application\DNSHeader.cs" />
     <Compile Include="Models\Headers\Network\IPHeader.cs" />
     <Compile Include="Models\Headers\Transport\TCPHeader.cs" />
-    <Compile Include="Network\BandwidthMonitoringUtilities\IMonitorObserver.cs" />
-    <Compile Include="Network\BandwidthMonitoringUtilities\IMonitorSubject.cs" />
     <Compile Include="Models\Packets\TCPPacket.cs" />
     <Compile Include="Models\Headers\Transport\UDPHeader.cs" />
     <Compile Include="Models\Packets\UDPPacket.cs" />
     <Compile Include="Models\NetworkStatistics.cs" />
     <Compile Include="Network\PacketTracingUtilities\PacketTracer.cs" />
+    <Compile Include="Network\PacketTracingUtilities\PacketTracerEventArgs.cs" />
     <Compile Include="Network\Program.cs" />
     <Compile Include="Network\BandwidthMonitoringUtilities\BandwithMonitor.cs" />
     <Compile Include="Network\Utilities.cs" />
@@ -66,8 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

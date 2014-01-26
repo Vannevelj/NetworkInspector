@@ -1,80 +1,96 @@
-﻿using NetworkInspector.Models.Headers.Network;
-using NetworkInspector.Models.Headers.Transport;
-using NetworkInspector.Models.Packets;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using log4net;
+using log4net.Repository.Hierarchy;
+using NetworkInspector.Models.Headers.Network;
+using NetworkInspector.Models.Headers.Transport;
+using NetworkInspector.Models.Packets;
 
-namespace NetworkInspector.Network.PacketTracingUtilities {
-    public class PacketTracer : IPacketTracerSubject {
-        private ICollection<IPacketTracerObserver> _observers = new Collection<IPacketTracerObserver>();
+namespace NetworkInspector.Network.PacketTracingUtilities
+{
+    public class PacketTracer
+    {
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public event EventHandler<PacketTracerEventArgs> OnPacketReceived;
+
         private bool _running;
-        private byte[] _data = new byte[4096];
+        private readonly byte[] _data = new byte[4096];
 
         private Socket _mainSocket;
 
-        public void Capture() {
+        public void Capture()
+        {
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
             Console.WriteLine("Socket created");
-            _mainSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.121"), 0));
+            _mainSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.172"), 0));
             Console.WriteLine("Socket bound to " + _mainSocket.LocalEndPoint);
             _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             _running = true;
             _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
 
-            var byTrue = new byte[] { 1, 0, 0, 0 };
-            var byOut = new byte[] { 1, 0, 0, 0 };
+            var byTrue = new byte[] {1, 0, 0, 0};
+            var byOut = new byte[] {1, 0, 0, 0};
 
             _mainSocket.IOControl(IOControlCode.ReceiveAll, byTrue, byOut);
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             _running = false;
             _mainSocket.Close();
         }
 
-        private void OnReceive(IAsyncResult ar) {
-            var received = _mainSocket.EndReceive((ar));
+        private void OnReceive(IAsyncResult ar)
+        {
+            SocketError error;
+            var received = _mainSocket.EndReceive(ar, out error);
+
+            if (error != SocketError.Success)
+            {
+                _log.Warn(string.Format("Socket Error:\t{0}", error));
+                return; // needed?
+            }
+
             Parse(_data, received);
 
-            if (_running) {
+            if (_running)
+            {
                 _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
             }
         }
 
-        private void Parse(byte[] data, int size) {
+        private void Parse(byte[] data, int size)
+        {
             var packet = new IPHeader(data, size);
 
-            switch (packet.ProtocolType) {
-                case ProtocolType.Udp: {
-                        var udp = new UDPHeader(packet.Data, packet.MessageLength);
-                        NotifyObservers(new UDPPacket(packet, udp));
-                    }
+            switch (packet.ProtocolType)
+            {
+                case Protocol.UDP:
+                {
+                    var udp = new UDPHeader(packet.Data, packet.MessageLength);
+                    _log.Info(udp);
+                    NotifyObservers(new UDPPacket(packet, udp));
+                }
                     break;
 
-                case ProtocolType.Tcp: {
-                        var tcp = new TCPHeader(packet.Data, packet.MessageLength);
-                        NotifyObservers(new TCPPacket(packet, tcp));
-                    }
+                case Protocol.TCP:
+                {
+                    var tcp = new TCPHeader(packet.Data, packet.MessageLength);
+                    _log.Info(tcp);
+                    NotifyObservers(new TCPPacket(packet, tcp));
+                }
                     break;
             }
         }
 
-        public void AddObserver(IPacketTracerObserver obs) {
-            _observers.Add(obs);
-        }
+        private void NotifyObservers(Packet p)
+        {
+            var handler = OnPacketReceived;
 
-        public void NotifyObservers(TCPPacket tcp) {
-            foreach (var observer in _observers) {
-                observer.IncomingPacket(tcp);
-            }
-        }
-
-        public void NotifyObservers(UDPPacket udp) {
-            foreach (var observer in _observers) {
-                observer.IncomingPacket(udp);
+            if (handler != null)
+            {
+                handler.Invoke(this, new PacketTracerEventArgs {Packet = p});
             }
         }
     }

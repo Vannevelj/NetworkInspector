@@ -1,11 +1,14 @@
-﻿using NetworkInspector.Models;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using NetworkInspector.Extensions;
+using NetworkInspector.Models;
 
-namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
-    public class BandwithMonitor : IMonitorSubject {
-        private readonly List<IMonitorObserver> _observers = new List<IMonitorObserver>();
+namespace NetworkInspector.Network.BandwidthMonitoringUtilities
+{
+    public class BandwithMonitor
+    {
+        public event EventHandler<NetworkStatisticsEventArgs> OnUpdateNetworkStatistics;
         private bool _running = true;
 
 
@@ -17,10 +20,14 @@ namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
         // <summary>
         // Starts the monitoring of network activity
         // </summary>
-        public void UpdateNetworkStatistics(INetworkStatistics stats) {
-            while (_running) {
-                var dataSentCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec", stats.NetworkInterface.Description.Replace('(', '[').Replace(')', ']'));
-                var dataReceivedCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec", stats.NetworkInterface.Description.Replace('(', '[').Replace(')', ']'));
+        public void UpdateNetworkStatistics(INetworkStatistics stats)
+        {
+            while (_running)
+            {
+                var dataSentCounter = new PerformanceCounter("Network Interface", "Bytes Sent/sec",
+                    stats.NetworkInterface.Description.ReplaceOptionalBrackets());
+                var dataReceivedCounter = new PerformanceCounter("Network Interface", "Bytes Received/sec",
+                    stats.NetworkInterface.Description.ReplaceOptionalBrackets());
 
                 var initSent = dataSentCounter.NextValue();
                 var initReceived = dataReceivedCounter.NextValue();
@@ -36,21 +43,22 @@ namespace NetworkInspector.Network.BandwidthMonitoringUtilities {
             }
         }
 
+        private void NotifyObservers(INetworkStatistics stats)
+        {
+            var handler = OnUpdateNetworkStatistics;
+
+            if (handler != null)
+            {
+                handler(this, new NetworkStatisticsEventArgs {NetworkStatistics = stats});
+            }
+        }
+
         // <summary>
         // Stops the monitoring of network activity
         // </summary>
-        public void Stop() {
+        public void Stop()
+        {
             _running = false;
-        }
-
-        public void AddObserver(IMonitorObserver obs) {
-            _observers.Add(obs);
-        }
-
-        public void NotifyObservers(INetworkStatistics stats) {
-            foreach (var obs in _observers) {
-                obs.TransferUpdate(stats);
-            }
         }
     }
 }
