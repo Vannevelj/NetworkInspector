@@ -146,8 +146,10 @@ namespace NetworkInspector.Network
                 stats.NetworkStatistics.DownloadSpeed.KiloBytesPerSecond.ToString("0.000"));
             Console.WriteLine("Upload speed:\t\t{0} KBytes/s",
                 stats.NetworkStatistics.UploadSpeed.KiloBytesPerSecond.ToString("0.000"));
-            Console.WriteLine("Total downloaded:{0} MB", stats.NetworkStatistics.TotalDataReceived.MegaBytesPerSecond.ToString("0.000"));
-            Console.WriteLine("Total uploaded:{0} MB", stats.NetworkStatistics.TotalDataSent.MegaBytesPerSecond.ToString("0.000"));
+            Console.WriteLine("Total downloaded:\t{0} MB",
+                stats.NetworkStatistics.TotalDataReceived.MegaBytesPerSecond.ToString("0.000"));
+            Console.WriteLine("Total uploaded:\t\t{0} MB",
+                stats.NetworkStatistics.TotalDataSent.MegaBytesPerSecond.ToString("0.000"));
             Console.WriteLine("--------------------------------------------------------------\n\n");
         }
     }

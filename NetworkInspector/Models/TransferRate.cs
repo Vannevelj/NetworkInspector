@@ -2,7 +2,11 @@
 {
     public class TransferRate
     {
-        private readonly float _data;
+        private float _data;
+
+        public TransferRate()
+        {
+        }
 
         public TransferRate(float f)
         {
@@ -22,6 +26,12 @@
         public float MegaBytesPerSecond
         {
             get { return KiloBytesPerSecond/1028; }
+        }
+
+        public TransferRate Update(float f)
+        {
+            _data = f;
+            return this;
         }
     }
 }
