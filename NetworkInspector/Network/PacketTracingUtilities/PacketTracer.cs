@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using log4net;
-using log4net.Repository.Hierarchy;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
@@ -11,7 +11,7 @@ namespace NetworkInspector.Network.PacketTracingUtilities
 {
     public class PacketTracer
     {
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public event EventHandler<PacketTracerEventArgs> OnPacketReceived;
 
         private bool _running;
@@ -23,7 +23,7 @@ namespace NetworkInspector.Network.PacketTracingUtilities
         {
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
             Console.WriteLine("Socket created");
-            _mainSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.172"), 0));
+            _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
             Console.WriteLine("Socket bound to " + _mainSocket.LocalEndPoint);
             _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             _running = true;
@@ -49,7 +49,7 @@ namespace NetworkInspector.Network.PacketTracingUtilities
             if (error != SocketError.Success)
             {
                 _log.Warn(string.Format("Socket Error:\t{0}", error));
-                return; // needed?
+                return;
             }
 
             Parse(_data, received);

@@ -5,41 +5,34 @@ namespace NetworkInspector.Models
 {
     public class NetworkStatistics : INetworkStatistics
     {
-        private readonly TransferRate _downTransferRate;
-        private readonly TransferRate _upTransferRate;
-        private readonly TransferRate _totalDownTransferRate;
-        private readonly TransferRate _totalUpTransferRate;
+        private DataTransfer _data = new DataTransfer();
 
         public NetworkStatistics(string name)
         {
             NetworkInterface = Utilities.GetInterfaceInformation(name);
-            _downTransferRate = new TransferRate();
-            _upTransferRate = new TransferRate();
-            _totalDownTransferRate = new TransferRate();
-            _totalUpTransferRate = new TransferRate();
         }
 
         public NetworkInterface NetworkInterface { get; set; }
 
         public TransferRate TotalDataSent
         {
-            get { return _totalUpTransferRate; }
+            get { return new TransferRate(_data.TotalUploaded); }
         }
 
 
         public TransferRate TotalDataReceived
         {
-            get { return _totalDownTransferRate; }
+            get { return new TransferRate(_data.TotalDownloaded); }
         }
 
         public TransferRate UploadSpeed
         {
-            get { return _upTransferRate; }
+            get { return new TransferRate(_data.LatestUploaded); }
         }
 
         public TransferRate DownloadSpeed
         {
-            get { return _downTransferRate; }
+            get { return new TransferRate(_data.LatestDownloaded); }
         }
 
         // <summary>
@@ -47,7 +40,7 @@ namespace NetworkInspector.Models
         // </summary>
         public void AddSentData(float d)
         {
-            _upTransferRate.AddDataPoint(d);
+            _data.Send(d);
         }
 
         // <summary>
@@ -55,7 +48,7 @@ namespace NetworkInspector.Models
         // </summary>
         public void AddReceivedData(float d)
         {
-            _downTransferRate.AddDataPoint(d);
+            _data.Receive(d);
         }
     }
 }

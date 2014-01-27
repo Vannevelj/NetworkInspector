@@ -62,7 +62,8 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public override string ToString()
         {
-            return string.Format("UDP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort, Length);
+            return string.Format("UDP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
+                Length);
         }
     }
 }

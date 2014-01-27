@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace NetworkInspector.Network
@@ -26,6 +28,17 @@ namespace NetworkInspector.Network
         public static NetworkInterface GetInterfaceInformation(string name)
         {
             return NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(x => x.Description == name);
+        }
+
+        /// <summary>
+        ///     Retrieves the IP of the current device in the local network
+        /// </summary>
+        /// <returns>The Local IP address</returns>
+        public static IPAddress GetLocalIP()
+        {
+            return
+                Dns.GetHostEntry(Dns.GetHostName())
+                    .AddressList.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);
         }
     }
 }

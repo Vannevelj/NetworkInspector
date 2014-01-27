@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace NetworkInspector.Models
+﻿namespace NetworkInspector.Models
 {
     public class TransferRate
     {
-        private readonly Queue<float> _latestTransfers = new Queue<float>(new[] {0f, 0f, 0f});
+        private readonly float _data;
+
+        public TransferRate(float f)
+        {
+            _data = f;
+        }
 
         public float BytesPerSecond
         {
-            get { return _latestTransfers.Sum()/_latestTransfers.Count; }
+            get { return _data; }
         }
 
         public float KiloBytesPerSecond
@@ -20,12 +22,6 @@ namespace NetworkInspector.Models
         public float MegaBytesPerSecond
         {
             get { return KiloBytesPerSecond/1028; }
-        }
-
-        public void AddDataPoint(float f)
-        {
-            _latestTransfers.Dequeue();
-            _latestTransfers.Enqueue(f);
         }
     }
 }
