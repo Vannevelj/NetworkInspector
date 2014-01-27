@@ -13,19 +13,19 @@
             _data = f;
         }
 
-        public float BytesPerSecond
+        public float InBytes
         {
             get { return _data; }
         }
 
-        public float KiloBytesPerSecond
+        public float InKiloBytes
         {
-            get { return BytesPerSecond/1028; }
+            get { return InBytes/1028; }
         }
 
-        public float MegaBytesPerSecond
+        public float InMegaBytes
         {
-            get { return KiloBytesPerSecond/1028; }
+            get { return InKiloBytes/1028; }
         }
 
         public TransferRate Update(float f)

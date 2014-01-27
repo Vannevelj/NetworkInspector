@@ -143,13 +143,13 @@ namespace NetworkInspector.Network
         public void TransferUpdate(object sender, NetworkStatisticsEventArgs stats)
         {
             Console.WriteLine("Download speed:\t\t{0} KBytes/s",
-                stats.NetworkStatistics.DownloadSpeed.KiloBytesPerSecond.ToString("0.000"));
+                stats.NetworkStatistics.DownloadSpeed.InKiloBytes.ToString("0.000"));
             Console.WriteLine("Upload speed:\t\t{0} KBytes/s",
-                stats.NetworkStatistics.UploadSpeed.KiloBytesPerSecond.ToString("0.000"));
+                stats.NetworkStatistics.UploadSpeed.InKiloBytes.ToString("0.000"));
             Console.WriteLine("Total downloaded:\t{0} MB",
-                stats.NetworkStatistics.TotalDataReceived.MegaBytesPerSecond.ToString("0.000"));
+                stats.NetworkStatistics.TotalDataReceived.InMegaBytes.ToString("0.000"));
             Console.WriteLine("Total uploaded:\t\t{0} MB",
-                stats.NetworkStatistics.TotalDataSent.MegaBytesPerSecond.ToString("0.000"));
+                stats.NetworkStatistics.TotalDataSent.InMegaBytes.ToString("0.000"));
             Console.WriteLine("--------------------------------------------------------------\n\n");
         }
     }
