@@ -1,5 +1,7 @@
 ﻿using System;
 using NetworkInspector.Models.Headers.Application;
+using NetworkInspector.Models.Headers.Application.DNS;
+using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 

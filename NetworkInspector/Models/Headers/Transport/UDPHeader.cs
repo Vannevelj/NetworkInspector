@@ -19,15 +19,18 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public UDPHeader(byte[] buffer, int size)
         {
-            var stream = new MemoryStream(buffer, 0, size);
-            var reader = new BinaryReader(stream);
+            using (var stream = new MemoryStream(buffer, 0, size))
+            {
+                using (var reader = new BinaryReader(stream))
+                {
+                    _usSourcePort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usDestinationPort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usLength = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _sChecksum = IPAddress.NetworkToHostOrder(reader.ReadInt16());
 
-            _usSourcePort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usDestinationPort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usLength = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _sChecksum = IPAddress.NetworkToHostOrder(reader.ReadInt16());
-
-            Array.Copy(buffer, 8, _byData, 0, size - 8);
+                    Array.Copy(buffer, 8, _byData, 0, size - 8);
+                }
+            }
         }
 
         public int SourcePort

@@ -3,7 +3,7 @@ using System.Net;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
 
-namespace NetworkInspector.Models.Headers.Application
+namespace NetworkInspector.Models.Headers.Application.DNS
 {
     public class DNSHeader : IHeader
     {
@@ -16,15 +16,18 @@ namespace NetworkInspector.Models.Headers.Application
 
         public DNSHeader(byte[] buffer, int size)
         {
-            var stream = new MemoryStream(buffer, 0, size);
-            var reader = new BinaryReader(stream);
-
-            _usIdentification = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usTotalQuestions = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usTotalAnswerResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usTotalAuthorityResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usTotalAdditionalResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+            using (var stream = new MemoryStream(buffer, 0, size))
+            {
+                using (var reader = new BinaryReader(stream))
+                {
+                    _usIdentification = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usTotalQuestions = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usTotalAnswerResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usTotalAuthorityResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usTotalAdditionalResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                }
+            }
         }
 
         public string Identification

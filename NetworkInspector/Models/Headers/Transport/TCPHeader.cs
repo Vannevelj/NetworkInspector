@@ -32,24 +32,27 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public TCPHeader(byte[] buffer, int size)
         {
-            var mem = new MemoryStream(buffer, 0, size);
-            var reader = new BinaryReader(mem);
+            using (var stream = new MemoryStream(buffer, 0, size))
+            {
+                using (var reader = new BinaryReader(stream))
+                {
+                    _usSourcePort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usDestinationPort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _uiSequenceNumber = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt32());
+                    _uiAckNumber = (uint) IPAddress.NetworkToHostOrder(reader.ReadInt32());
+                    _usDataOffsetAndFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usWindow = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _sChecksum = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _usUrgPointer = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
 
-            _usSourcePort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usDestinationPort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _uiSequenceNumber = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt32());
-            _uiAckNumber = (uint) IPAddress.NetworkToHostOrder(reader.ReadInt32());
-            _usDataOffsetAndFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usWindow = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _sChecksum = IPAddress.NetworkToHostOrder(reader.ReadInt16());
-            _usUrgPointer = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _byHeaderLength = (byte) (_usDataOffsetAndFlags >> 12);
+                    _byHeaderLength *= 4;
 
-            _byHeaderLength = (byte) (_usDataOffsetAndFlags >> 12);
-            _byHeaderLength *= 4;
+                    _usMessageLength = (ushort) (size - _byHeaderLength);
 
-            _usMessageLength = (ushort) (size - _byHeaderLength);
-
-            Array.Copy(buffer, _byHeaderLength, _byTCPData, 0, size - _byHeaderLength);
+                    Array.Copy(buffer, _byHeaderLength, _byTCPData, 0, size - _byHeaderLength);
+                }
+            }
         }
 
         public int SourcePort

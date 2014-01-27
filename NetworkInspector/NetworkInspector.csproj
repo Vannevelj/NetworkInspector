@@ -48,13 +48,15 @@
   <ItemGroup>
     <Compile Include="Extensions\Helpers.cs" />
     <Compile Include="Models\DataTransfer.cs" />
-    <Compile Include="Models\Headers\Application\HTTPHeader.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\AcceptPreference.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HTTPHeader.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\CulturePreference.cs" />
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />
     <Compile Include="Network\BandwidthMonitoringUtilities\NetworkStatisticsEventArgs.cs" />
     <Compile Include="Models\INetworkStatistics.cs" />
-    <Compile Include="Models\Headers\Application\DNSHeader.cs" />
+    <Compile Include="Models\Headers\Application\DNS\DNSHeader.cs" />
     <Compile Include="Models\Headers\Network\IPHeader.cs" />
     <Compile Include="Models\Headers\Transport\TCPHeader.cs" />
     <Compile Include="Models\Packets\TCPPacket.cs" />
