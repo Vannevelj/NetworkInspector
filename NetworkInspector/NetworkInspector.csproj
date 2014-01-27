@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Extensions\Helpers.cs" />
     <Compile Include="Models\DataTransfer.cs" />
+    <Compile Include="Models\Headers\Application\HTTPHeader.cs" />
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />

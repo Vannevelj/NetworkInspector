@@ -11,6 +11,7 @@ namespace NetworkInspector.Models.Packets
         UDP,
         IP,
         DNS,
+        HTTP,
         UNKNOWN
     }
 
@@ -34,6 +35,10 @@ namespace NetworkInspector.Models.Packets
                     if (tcp.SourcePort == 53 || tcp.DestinationPort == 53)
                     {
                         ApplicationHeader = new DNSHeader(tcp.Data, tcp.MessageLength);
+                    }
+                    else if (tcp.SourcePort == 80 || tcp.DestinationPort == 80)
+                    {
+                        ApplicationHeader = new HTTPHeader(tcp.Data, tcp.MessageLength);
                     }
                 }
                     break;

@@ -151,7 +151,7 @@ namespace NetworkInspector.Models.Headers.Transport
         public override string ToString()
         {
             return string.Format("TCP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
-                MessageLength);
+                _usMessageLength);
         }
     }
 }
