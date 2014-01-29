@@ -24,10 +24,13 @@ namespace NetworkInspector.Network.PacketTracingUtilities
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
             Console.WriteLine("Socket created");
             _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
-            Console.WriteLine("Socket bound to " + _mainSocket.LocalEndPoint);
+            Console.WriteLine("Socket bound to {0}", _mainSocket.LocalEndPoint);
+
             _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             _running = true;
             _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
+
+            //http://stackoverflow.com/questions/9440130/socket-iocontrol-ambiguous-documentation
 
             var byTrue = new byte[] {1, 0, 0, 0};
             var byOut = new byte[] {1, 0, 0, 0};
@@ -50,8 +53,10 @@ namespace NetworkInspector.Network.PacketTracingUtilities
             {
                 _log.Warn(string.Format("Socket Error:\t{0}", error));
             }
-
-            Parse(_data, received);
+            else
+            {
+                Parse(_data, received);
+            }
 
             if (_running)
             {

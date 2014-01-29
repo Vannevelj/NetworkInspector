@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{33E9C4
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIApplication", "GUIApplication\GUIApplication.csproj", "{7C3E94CB-022A-4BBB-A153-050EE8E773AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +26,14 @@ Global
 		{BA7104F9-1B8A-425B-A4A2-D56F24EF148D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA7104F9-1B8A-425B-A4A2-D56F24EF148D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA7104F9-1B8A-425B-A4A2-D56F24EF148D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

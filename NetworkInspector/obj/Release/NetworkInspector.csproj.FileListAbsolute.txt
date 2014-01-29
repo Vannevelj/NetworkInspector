@@ -1,0 +1,10 @@
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\Models\Headers\Application\HTTP\conversions.xml
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.dll
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.xml
+D:\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.XML
+D:\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.csprojResolveAssemblyReference.cache
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll.config
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll
+D:\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.dll

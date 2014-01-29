@@ -16,3 +16,4 @@ D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojRes
 D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.dll
 D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.xml
 D:\Github\NetworkInspector\NetworkInspector\bin\Debug\Models\Headers\Application\HTTP\conversions.xml
+D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.XML

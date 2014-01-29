@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using NetworkInspector.Models.Packets;
+using NetworkInspector.Network;
 using NetworkInspector.Network.BandwidthMonitoringUtilities;
 using NetworkInspector.Network.PacketTracingUtilities;
 
-namespace NetworkInspector.Network
+namespace ConsoleApplication
 {
-    public class Program
+    internal class Program
     {
+        private static void Main(string[] args)
+        {
+            new Program();
+        }
+
         public Program()
         {
             var instances = Utilities.GetNetworkInterfaces();

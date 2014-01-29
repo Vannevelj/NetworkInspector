@@ -1,0 +1,12 @@
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.exe.config
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\Models\Headers\Application\HTTP\conversions.xml
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.exe
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.pdb
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.dll
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\log4net.dll
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.pdb
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.xml
+D:\Github\NetworkInspector\ConsoleApplication\bin\Release\log4net.xml
+D:\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.csprojResolveAssemblyReference.cache
+D:\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.exe
+D:\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.pdb
