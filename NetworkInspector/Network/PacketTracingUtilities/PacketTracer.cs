@@ -49,7 +49,6 @@ namespace NetworkInspector.Network.PacketTracingUtilities
             if (error != SocketError.Success)
             {
                 _log.Warn(string.Format("Socket Error:\t{0}", error));
-                return;
             }
 
             Parse(_data, received);
@@ -69,7 +68,6 @@ namespace NetworkInspector.Network.PacketTracingUtilities
                 case Protocol.UDP:
                 {
                     var udp = new UDPHeader(packet.Data, packet.MessageLength);
-                    _log.Info(udp);
                     NotifyObservers(new UDPPacket(packet, udp));
                 }
                     break;
@@ -77,7 +75,6 @@ namespace NetworkInspector.Network.PacketTracingUtilities
                 case Protocol.TCP:
                 {
                     var tcp = new TCPHeader(packet.Data, packet.MessageLength);
-                    _log.Info(tcp);
                     NotifyObservers(new TCPPacket(packet, tcp));
                 }
                     break;
