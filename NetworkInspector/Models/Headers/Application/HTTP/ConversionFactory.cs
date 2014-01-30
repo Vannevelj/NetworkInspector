@@ -38,14 +38,18 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                     }).ToList();
         }
 
-        private static IEnumerable<Tuple<string, string>> GetStringTupleEnumerableValue(object o, string delimiter)
+        private static IEnumerable<Cookie> GetCookieEnumerableValue(object o, string delimiter)
         {
             var entries = ((string) o).Split(new[] {delimiter}, StringSplitOptions.RemoveEmptyEntries);
 
             return
                 entries.Select(
-                    x => x.Split(new[] {"="}, StringSplitOptions.RemoveEmptyEntries))
-                    .Select(pairs => new Tuple<string, string>(pairs[0], pairs[1])).ToList();
+                    x => x.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries))
+                    .Select(pairs => new Cookie
+                    {
+                        Key = pairs[0],
+                        Value = pairs[1]
+                    }).ToList();
         }
 
         private static DateTime GetDateTimeValue(object o)
@@ -82,7 +86,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                     return (T) System.Convert.ChangeType(GetIntValue(value), typeof (T));
 
                 case "Cookie":
-                    return (T) GetStringTupleEnumerableValue(value, ";");
+                    return (T) GetCookieEnumerableValue(value, ";");
 
                 case "If-Modified-Since":
                     return (T) System.Convert.ChangeType(GetDateTimeValue(value), typeof (T));

@@ -8,3 +8,13 @@ D:\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.csprojR
 D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll.config
 D:\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll
 D:\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\Models\Headers\Application\HTTP\conversions.xml
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll.config
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.XML
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\NetworkInspector.pdb
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.xml
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.csprojResolveAssemblyReference.cache
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.pdb

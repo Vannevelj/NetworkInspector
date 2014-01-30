@@ -71,6 +71,7 @@
     <Compile Include="Models\Headers\Application\HTTP\AcceptPreference.cs" />
     <Compile Include="Models\Headers\Application\HTTP\Conversion.cs" />
     <Compile Include="Models\Headers\Application\HTTP\ConversionFactory.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\Cookie.cs" />
     <Compile Include="Models\Headers\Application\HTTP\HTTPHeader.cs" />
     <Compile Include="Models\Headers\Application\HTTP\CulturePreference.cs" />
     <Compile Include="Models\Headers\Transport\IHeader.cs" />

@@ -59,7 +59,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private int _contentLength;
         private string _requestedWith;
         private List<string> _contentType;
-        private List<Tuple<string, string>> _cookieValues;
+        private List<Cookie> _cookieValues;
         private string _origin;
         private List<AcceptPreference> _accept;
         private DateTime _ifModifiedSince;
@@ -191,7 +191,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             get { return _referer; }
         }
 
-        public IEnumerable<Tuple<string, string>> Cookies
+        public IEnumerable<Cookie> Cookies
         {
             get { return _cookieValues; }
         }
