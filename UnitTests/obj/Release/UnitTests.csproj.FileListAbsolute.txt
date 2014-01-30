@@ -1,0 +1,11 @@
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\Models\Headers\Application\HTTP\conversions.xml
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\UnitTests.dll
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\UnitTests.pdb
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\log4net.dll
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\NetworkInspector.pdb
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\NetworkInspector.xml
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\bin\Release\log4net.xml
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\obj\Release\UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\obj\Release\UnitTests.dll
+C:\Users\jeroen\Github\NetworkInspector\UnitTests\obj\Release\UnitTests.pdb

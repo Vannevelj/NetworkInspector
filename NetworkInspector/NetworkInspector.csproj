@@ -88,7 +88,7 @@
     <Compile Include="Models\NetworkStatistics.cs" />
     <Compile Include="Network\PacketTracingUtilities\PacketTracer.cs" />
     <Compile Include="Network\PacketTracingUtilities\PacketTracerEventArgs.cs" />
-    <Compile Include="Network\BandwidthMonitoringUtilities\BandwithMonitor.cs" />
+    <Compile Include="Network\BandwidthMonitoringUtilities\BandwidthMonitor.cs" />
     <Compile Include="Network\Utilities.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +100,7 @@
   <ItemGroup>
     <Content Include="Models\Headers\Application\HTTP\conversions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

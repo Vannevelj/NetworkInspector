@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkInspector", "NetworkInspector\NetworkInspector.csproj", "{BA7104F9-1B8A-425B-A4A2-D56F24EF148D}"
 EndProject
@@ -15,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{41DE3A2E-C2FC-428E-90B6-AB95AAC982CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIApplication", "GUIApplication\GUIApplication.csproj", "{7C3E94CB-022A-4BBB-A153-050EE8E773AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C3E94CB-022A-4BBB-A153-050EE8E773AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

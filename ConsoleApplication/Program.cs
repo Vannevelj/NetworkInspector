@@ -47,7 +47,7 @@ namespace ConsoleApplication
 
                 case 2:
                 {
-                    var monitor = new BandwithMonitor();
+                    var monitor = new BandwidthMonitor();
                     monitor.OnUpdateNetworkStatistics += TransferUpdate;
                     monitor.UpdateNetworkStatistics(monitor.GetNetworkStatistics(instances[choice]));
                 }

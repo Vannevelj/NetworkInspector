@@ -28,6 +28,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly List<Conversion> _conversions = new List<Conversion>();
+        private static readonly ConversionFactory _factory = new ConversionFactory();
 
         #region Conversions
 
@@ -128,9 +129,8 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 if (obj != null)
                 {
                     var type = obj.FieldType;
-                    var factory = new ConversionFactory();
-
-                    var method = factory.GetType()
+                    
+                    var method = _factory.GetType()
                         .GetMethod("Convert")
                         .MakeGenericMethod(new[] {type});
 

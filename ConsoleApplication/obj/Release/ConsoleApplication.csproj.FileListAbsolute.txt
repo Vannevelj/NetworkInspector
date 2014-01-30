@@ -13,3 +13,12 @@ D:\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.pdb
 C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.exe.config
 C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.exe
 C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.pdb
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\Models\Headers\Application\HTTP\conversions.xml
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.exe
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\ConsoleApplication.pdb
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\log4net.dll
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.pdb
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\NetworkInspector.xml
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\bin\Release\log4net.xml
+C:\Users\jeroen\Github\NetworkInspector\ConsoleApplication\obj\Release\ConsoleApplication.csprojResolveAssemblyReference.cache

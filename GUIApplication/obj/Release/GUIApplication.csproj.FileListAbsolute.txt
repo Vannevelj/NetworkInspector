@@ -1,0 +1,6 @@
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\bin\Release\GUIApplication.exe.config
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\bin\Release\GUIApplication.exe
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\bin\Release\GUIApplication.pdb
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\obj\Release\GUIApplication.csprojResolveAssemblyReference.cache
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\obj\Release\GUIApplication.exe
+C:\Users\jeroen\Github\NetworkInspector\GUIApplication\obj\Release\GUIApplication.pdb

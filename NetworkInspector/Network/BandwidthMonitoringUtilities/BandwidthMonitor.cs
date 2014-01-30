@@ -6,7 +6,7 @@ using NetworkInspector.Models;
 
 namespace NetworkInspector.Network.BandwidthMonitoringUtilities
 {
-    public class BandwithMonitor
+    public class BandwidthMonitor
     {
         public event EventHandler<NetworkStatisticsEventArgs> OnUpdateNetworkStatistics;
         private bool _running = true;

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NetworkInspector.Models.Headers.Application.HTTP
 {
-    internal class ConversionFactory
+    public class ConversionFactory
     {
         private static string GetStringValue(object o)
         {
