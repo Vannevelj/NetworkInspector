@@ -21,11 +21,10 @@ namespace NetworkInspector.Network.PacketTracingUtilities
 
         public void Capture()
         {
-            _log.Warn("hello");
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
-            Console.WriteLine("Socket created");
+            _log.Info("Socket created");
             _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
-            Console.WriteLine("Socket bound to {0}", _mainSocket.LocalEndPoint);
+            _log.Info(string.Format("Socket bound to {0}", _mainSocket.LocalEndPoint));
 
             _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             _running = true;

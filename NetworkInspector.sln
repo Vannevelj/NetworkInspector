@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkInspector", "NetworkInspector\NetworkInspector.csproj", "{BA7104F9-1B8A-425B-A4A2-D56F24EF148D}"
 EndProject
@@ -17,6 +17,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIApplication", "GUIApplication\GUIApplication.csproj", "{7C3E94CB-022A-4BBB-A153-050EE8E773AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A7A9F16E-1C6A-4CF7-A8B5-3B331F5FCBD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReferencedLibs", "ReferencedLibs", "{698E9B50-C54D-4D90-8801-736E1CBB654F}"
+	ProjectSection(SolutionItems) = preProject
+		ReferencedLibs\log4net.config = ReferencedLibs\log4net.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

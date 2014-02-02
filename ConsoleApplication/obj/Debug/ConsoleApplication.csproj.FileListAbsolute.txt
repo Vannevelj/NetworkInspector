@@ -10,3 +10,4 @@ D:\Github\NetworkInspector\ConsoleApplication\bin\Debug\log4net.xml
 D:\Github\NetworkInspector\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 D:\Github\NetworkInspector\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 D:\Github\NetworkInspector\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
+D:\Github\NetworkInspector\ConsoleApplication\bin\Debug\log4net.config

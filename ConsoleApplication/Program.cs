@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using System.Reflection;
+using log4net;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Network;
 using NetworkInspector.Network.BandwidthMonitoringUtilities;
@@ -9,8 +11,11 @@ namespace ConsoleApplication
 {
     internal class Program
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private static void Main(string[] args)
         {
+            _log.Info(string.Format("Session started at {0}", DateTime.Now));
             new Program();
         }
 
