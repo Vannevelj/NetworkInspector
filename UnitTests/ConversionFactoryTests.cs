@@ -11,7 +11,7 @@ namespace UnitTests
         [TestMethod]
         public void HostAsObject_ShouldReturn_StringValue()
         {
-            string host = "";
+            string host = "programmers.stackexchange.com";
             object obj = (object) host;
 
             Assert.AreEqual(host, ConversionFactory.Convert<string>("Host", obj));
@@ -20,7 +20,7 @@ namespace UnitTests
         [TestMethod]
         public void ConnectionAsObject_ShouldReturn_StringValue()
         {
-            string connection = "";
+            string connection = "keep-alive";
             object obj = (object) connection;
 
             Assert.AreEqual(connection, ConversionFactory.Convert<string>("Connection", obj));
@@ -29,7 +29,7 @@ namespace UnitTests
         [TestMethod]
         public void UserAgentAsObject_ShouldReturn_StringValue()
         {
-            string userAgent = "";
+            string userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36";
             object obj = (object) userAgent;
 
             Assert.AreEqual(userAgent, ConversionFactory.Convert<string>("User-Agent", obj));
@@ -53,7 +53,7 @@ namespace UnitTests
         [TestMethod]
         public void AcceptEncodingAsObject_ShouldReturn_ListOfStringValue()
         {
-            string acceptEncoding = "";
+            string acceptEncoding = "gzip, deflate, sdch";
             object obj = (object) acceptEncoding;
 
             var result = ConversionFactory.Convert<List<string>>("Accept-Encoding", obj);
@@ -64,7 +64,7 @@ namespace UnitTests
         [TestMethod]
         public void AcceptLanguageAsObject_ShouldReturn_StringValue()
         {
-            string acceptLanguage = "";
+            string acceptLanguage = "nl-NL,nl;q=0.8,en-US;q=0.6,en;q=0.4,fr;q=0.2";
             object obj = (object) acceptLanguage;
 
             Assert.AreEqual(acceptLanguage, ConversionFactory.Convert<string>("Accept-Language", obj));
@@ -73,7 +73,7 @@ namespace UnitTests
         [TestMethod]
         public void CacheControlAsObject_ShouldReturn_StringValue()
         {
-            string cacheControl = "";
+            string cacheControl = "max-age=0";
             object obj = (object) cacheControl;
 
             Assert.AreEqual(cacheControl, ConversionFactory.Convert<string>("Cache-Control", obj));
@@ -83,14 +83,13 @@ namespace UnitTests
         [TestMethod]
         public void IfModifiedSinceAsObject_ShouldReturn_DateTimeValue()
         {
-            string ifModifiedSince = "";
-            int year = 0;
-            int month = 0;
-            int day = 0;
-            int hour = 0;
-            int minute = 0;
-            int second = 0;
-            // Something for timezone
+            string ifModifiedSince = "Sun, 02 Feb 2014 09:46:17 GMT";
+            int year = 2014;
+            int month = 2;
+            int day = 2;
+            int hour = 9;
+            int minute = 46;
+            int second = 17;
 
             object obj = (object) ifModifiedSince;
 

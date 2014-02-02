@@ -129,15 +129,22 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 if (obj != null)
                 {
                     var type = obj.FieldType;
-                    
+
                     var method = _factory.GetType()
                         .GetMethod("Convert")
                         .MakeGenericMethod(new[] {type});
 
                     obj.SetValue(this, method.Invoke(this, new object[] {conversion.HTTPValue, value.Trim()}));
 
-                    _log.Info(obj.GetValue(this));
+                    _log.Debug(obj.GetValue(this).ToString());
+                    _log.Info(obj.GetValue(this).ToString());
+                    _log.Warn(obj.GetValue(this).ToString());
+                    _log.Fatal(obj.GetValue(this).ToString());
                 }
+            }
+            else
+            {
+                _log.Warn(string.Format("Field {0} could not be found.", key));
             }
         }
 

@@ -21,6 +21,7 @@ namespace NetworkInspector.Network.PacketTracingUtilities
 
         public void Capture()
         {
+            _log.Warn("hello");
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
             Console.WriteLine("Socket created");
             _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
