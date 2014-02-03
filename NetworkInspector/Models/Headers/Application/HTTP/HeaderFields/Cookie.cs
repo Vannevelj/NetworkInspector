@@ -1,4 +1,4 @@
-﻿namespace NetworkInspector.Models.Headers.Application.HTTP
+﻿namespace NetworkInspector.Models.Headers.Application.HTTP.HeaderFields
 {
     public struct Cookie
     {

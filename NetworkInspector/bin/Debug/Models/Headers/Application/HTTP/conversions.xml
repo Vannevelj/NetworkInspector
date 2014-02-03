@@ -55,11 +55,6 @@
   </PAIR>
 
   <PAIR>
-    <HTTP>X-Requested-With</HTTP>
-    <FIELD>_requestedWith</FIELD>
-  </PAIR>
-
-  <PAIR>
     <HTTP>Content-Type</HTTP>
     <FIELD>_contentType</FIELD>
   </PAIR>
@@ -72,5 +67,10 @@
   <PAIR>
     <HTTP>If-None-Match</HTTP>
     <FIELD>_ifNoneMatch</FIELD>
+  </PAIR>
+
+  <PAIR>
+    <HTTP>Accept-Charset</HTTP>
+    <FIELD>_acceptCharset</FIELD>
   </PAIR>
 </PAIRS>

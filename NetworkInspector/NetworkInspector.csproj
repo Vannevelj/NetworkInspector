@@ -68,12 +68,14 @@
   <ItemGroup>
     <Compile Include="Extensions\Helpers.cs" />
     <Compile Include="Models\DataTransfer.cs" />
-    <Compile Include="Models\Headers\Application\HTTP\AcceptPreference.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HeaderFields\CharsetPreference.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HeaderFields\AcceptPreference.cs" />
     <Compile Include="Models\Headers\Application\HTTP\Conversion.cs" />
     <Compile Include="Models\Headers\Application\HTTP\ConversionFactory.cs" />
-    <Compile Include="Models\Headers\Application\HTTP\Cookie.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HeaderFields\Cookie.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HeaderFields\CustomField.cs" />
     <Compile Include="Models\Headers\Application\HTTP\HTTPHeader.cs" />
-    <Compile Include="Models\Headers\Application\HTTP\CulturePreference.cs" />
+    <Compile Include="Models\Headers\Application\HTTP\HeaderFields\CulturePreference.cs" />
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />

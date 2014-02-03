@@ -6,8 +6,10 @@ using System.Net;
 using System.Reflection;
 using System.Xml.Linq;
 using log4net;
+using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
+using Cookie = NetworkInspector.Models.Headers.Application.HTTP.HeaderFields.Cookie;
 
 namespace NetworkInspector.Models.Headers.Application.HTTP
 {
@@ -58,7 +60,6 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private List<string> _acceptEncoding;
         private string _acceptLanguage;
         private int _contentLength;
-        private string _requestedWith;
         private List<string> _contentType;
         private List<Cookie> _cookieValues;
         private string _origin;
@@ -66,6 +67,8 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private DateTime _ifModifiedSince;
         private string _cacheControl;
         private string _ifNoneMatch;
+        private readonly List<CustomField> _customHeaders = new List<CustomField>();
+        private List<CharsetPreference> _acceptCharset; 
 
         public HTTPHeader(byte[] data, int length)
         {
@@ -107,42 +110,63 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         private void ParseField(string field)
         {
-            var pair = field.Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
+            var pair = field.Split(new[] {":"}, 2, StringSplitOptions.RemoveEmptyEntries);
 
-            if (pair.Length != 2)
+            if (pair.Length < 2)
             {
                 return;
             }
 
-            var key = pair[0];
-            var value = pair[1];
+            var key = pair[0].Trim();
+            var value = pair[1].Trim();
 
             var conversion = _conversions.FirstOrDefault(x => x.HTTPValue == key);
 
             if (conversion != null)
             {
-                var obj =
-                    GetType()
-                        .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
-                        .FirstOrDefault(x => x.Name == conversion.ObjectValue);
-
-                if (obj != null)
-                {
-                    var type = obj.FieldType;
-
-                    var method = _factory.GetType()
-                        .GetMethod("Convert")
-                        .MakeGenericMethod(new[] {type});
-
-                    obj.SetValue(this, method.Invoke(this, new object[] {conversion.HTTPValue, value.Trim()}));
-
-                    _log.Info(string.Format("{0}: {1}", conversion.HTTPValue, value));
-                }
+                ConvertData(conversion.ObjectValue, conversion.HTTPValue, value);
+            }
+            else if (IsCustomHeader(key))
+            {
+                AddCustomHeader(key, value);
             }
             else
             {
-                _log.Warn(string.Format("Field \"{0}\" could not be found.", key));
+                _log.Warn(string.Format("Field \"{0}\" could not be found. Value is \"{1}\".", key, value));
             }
+        }
+
+        private void ConvertData(string localField, string key, string value)
+        {
+            var obj =
+                GetType()
+                    .GetFields(BindingFlags.Instance | BindingFlags.NonPublic)
+                    .FirstOrDefault(x => x.Name == localField);
+
+            if (obj != null)
+            {
+                var type = obj.FieldType;
+
+                var method = _factory.GetType()
+                    .GetMethod("Convert")
+                    .MakeGenericMethod(new[] {type});
+
+                var result = method.Invoke(this, new object[] {key, value});
+                obj.SetValue(this, result);
+               
+                _log.Debug(string.Format("{0}: {1}", key, value));
+            }
+        }
+
+        private void AddCustomHeader(string key, string value)
+        {
+            _customHeaders.Add(ConversionFactory.Convert<CustomField>(key, value));
+            _log.Debug(string.Format("Custom headers: [{0}]", string.Join(",", _customHeaders)));
+        }
+
+        private bool IsCustomHeader(string key)
+        {
+            return key.StartsWith("X-");
         }
 
         public Protocol ProtocolName
@@ -205,9 +229,9 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             get { return _contentLength; }
         }
 
-        public string XRequestedWith
+        public IEnumerable<CustomField> CustomHeaders
         {
-            get { return _requestedWith; }
+            get { return _customHeaders; }
         }
 
         public List<string> ContentType

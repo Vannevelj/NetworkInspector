@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace NetworkInspector.Models.Headers.Application.HTTP
+namespace NetworkInspector.Models.Headers.Application.HTTP.HeaderFields
 {
     [Obsolete("Culture preferences are handled as a string right now", true)]
     internal struct CulturePreference
