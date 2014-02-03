@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkInspector.Models.Headers.Application.HTTP;
-using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -11,8 +11,8 @@ namespace UnitTests
         [TestMethod]
         public void HostAsObject_ShouldReturn_StringValue()
         {
-            string host = "programmers.stackexchange.com";
-            object obj = (object) host;
+            const string host = "programmers.stackexchange.com";
+            object obj = host;
 
             Assert.AreEqual(host, ConversionFactory.Convert<string>("Host", obj));
         }
@@ -20,8 +20,8 @@ namespace UnitTests
         [TestMethod]
         public void ConnectionAsObject_ShouldReturn_StringValue()
         {
-            string connection = "keep-alive";
-            object obj = (object) connection;
+            const string connection = "keep-alive";
+            object obj = connection;
 
             Assert.AreEqual(connection, ConversionFactory.Convert<string>("Connection", obj));
         }
@@ -29,43 +29,60 @@ namespace UnitTests
         [TestMethod]
         public void UserAgentAsObject_ShouldReturn_StringValue()
         {
-            string userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36";
-            object obj = (object) userAgent;
+            const string userAgent =
+                "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36";
+            object obj = userAgent;
 
             Assert.AreEqual(userAgent, ConversionFactory.Convert<string>("User-Agent", obj));
         }
 
-        [Ignore]
         [TestMethod]
         public void AcceptAsObject_ShouldReturn_ListOfAcceptPreferenceValue()
         {
-            string accept = "";
-            object obj = (object) accept;
+            const string accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            object obj = accept;
 
             var result = ConversionFactory.Convert<List<AcceptPreference>>("Accept", obj);
 
-            foreach(var acc in result){
-                StringAssert.Contains(accept, string.Format("{0}={1}", acc.Type, acc.Weight));
-            } //TODO: this isn't correct yet
+            Assert.AreEqual("text/html", result[0].Type);
+            Assert.AreEqual(1, result[0].Weight);
+            Assert.AreEqual(1, result[0].Order);
+
+            Assert.AreEqual("application/xhtml+xml", result[1].Type);
+            Assert.AreEqual(1, result[1].Weight);
+            Assert.AreEqual(2, result[1].Order);
+
+            Assert.AreEqual("application/xml", result[2].Type);
+            Assert.AreEqual(0.9, result[2].Weight);
+            Assert.AreEqual(3, result[2].Order);
+
+            Assert.AreEqual("image/webp", result[3].Type);
+            Assert.AreEqual(1, result[3].Weight);
+            Assert.AreEqual(4, result[3].Order);
+
+            Assert.AreEqual("*/*", result[4].Type);
+            Assert.AreEqual(0.8, result[4].Weight);
+            Assert.AreEqual(5, result[4].Order);
         }
 
-        [Ignore]
         [TestMethod]
         public void AcceptEncodingAsObject_ShouldReturn_ListOfStringValue()
         {
-            string acceptEncoding = "gzip, deflate, sdch";
-            object obj = (object) acceptEncoding;
+            const string acceptEncoding = "gzip, deflate, sdch";
+            object obj = acceptEncoding;
 
             var result = ConversionFactory.Convert<List<string>>("Accept-Encoding", obj);
 
-            // Foreach
+            Assert.IsTrue(result.Contains("gzip"));
+            Assert.IsTrue(result.Contains("deflate"));
+            Assert.IsTrue(result.Contains("sdch"));
         }
 
         [TestMethod]
         public void AcceptLanguageAsObject_ShouldReturn_StringValue()
         {
-            string acceptLanguage = "nl-NL,nl;q=0.8,en-US;q=0.6,en;q=0.4,fr;q=0.2";
-            object obj = (object) acceptLanguage;
+            const string acceptLanguage = "nl-NL,nl;q=0.8,en-US;q=0.6,en;q=0.4,fr;q=0.2";
+            object obj = acceptLanguage;
 
             Assert.AreEqual(acceptLanguage, ConversionFactory.Convert<string>("Accept-Language", obj));
         }
@@ -73,25 +90,24 @@ namespace UnitTests
         [TestMethod]
         public void CacheControlAsObject_ShouldReturn_StringValue()
         {
-            string cacheControl = "max-age=0";
-            object obj = (object) cacheControl;
+            const string cacheControl = "max-age=0";
+            object obj = cacheControl;
 
             Assert.AreEqual(cacheControl, ConversionFactory.Convert<string>("Cache-Control", obj));
         }
 
-        [Ignore]
         [TestMethod]
         public void IfModifiedSinceAsObject_ShouldReturn_DateTimeValue()
         {
-            string ifModifiedSince = "Sun, 02 Feb 2014 09:46:17 GMT";
-            int year = 2014;
-            int month = 2;
-            int day = 2;
-            int hour = 9;
-            int minute = 46;
-            int second = 17;
+            const string ifModifiedSince = "Sun, 02 Feb 2014 09:46:17 GMT";
+            const int year = 2014;
+            const int month = 2;
+            const int day = 2;
+            const int hour = 9;
+            const int minute = 46;
+            const int second = 17;
 
-            object obj = (object) ifModifiedSince;
+            object obj = ifModifiedSince;
 
             var result = ConversionFactory.Convert<DateTime>("If-Modified-Since", obj);
 
@@ -103,31 +119,42 @@ namespace UnitTests
             Assert.AreEqual(second, result.Second);
         }
 
+        [Ignore]
         [TestMethod]
         public void RefererAsObject_ShouldReturn_StringValue()
         {
-            string referer = "";
-            object obj = (object) referer;
+            const string referer = "";
+            object obj = referer;
 
             Assert.AreEqual(referer, ConversionFactory.Convert<string>("Referer", obj));
         }
 
-        [Ignore]
         [TestMethod]
         public void CookieAsObject_ShouldReturn_CookieValue()
         {
-            string cookie = "";
-            object obj = (object) cookie;
+            const string cookie =
+                "guest_id=v1%3A139035819669988; __utma=43838368.646140943.1390426206.1391168239.1391343148.7; __utmz=43838368.1391343148.7.6.utmcsr=reddit.com|utmccn=(referral)|utmcmd=referral|utmcct=/r/belgium/comments/1wr3o9/anybody_any_idea_what_is_going_on_with_laurent/";
+            object obj = cookie;
 
             var result = ConversionFactory.Convert<List<Cookie>>("Cookie", obj);
-            //TODO: asserts
+
+            Assert.AreEqual("guest_id", result[0].Key);
+            Assert.AreEqual("v1%3A139035819669988", result[0].Value);
+
+            Assert.AreEqual("__utma", result[1].Key);
+            Assert.AreEqual("43838368.646140943.1390426206.1391168239.1391343148.7", result[1].Value);
+
+            Assert.AreEqual("__utmz", result[2].Key);
+            Assert.AreEqual(
+                "43838368.1391343148.7.6.utmcsr=reddit.com|utmccn=(referral)|utmcmd=referral|utmcct=/r/belgium/comments/1wr3o9/anybody_any_idea_what_is_going_on_with_laurent/",
+                result[2].Value);
         }
 
         [TestMethod]
         public void ContentLengthAsObject_ShouldReturn_IntValue()
         {
-            string contentLength = "";
-            object obj = (object) contentLength;
+            const string contentLength = "398";
+            object obj = contentLength;
 
             Assert.AreEqual(Int32.Parse(contentLength), ConversionFactory.Convert<int>("Content-Length", obj));
         }
@@ -135,27 +162,29 @@ namespace UnitTests
         [TestMethod]
         public void XRequestedWithAsObject_ShouldReturn_StringValue()
         {
-            string requestedWith = "";
-            object obj = (object) requestedWith;
+            const string requestedWith = "XMLHttpRequest";
+            object obj = requestedWith;
 
             Assert.AreEqual(requestedWith, ConversionFactory.Convert<string>("X-Requested-With", obj));
         }
 
-        [Ignore]
         [TestMethod]
         public void ContentTypeAsObject_ShouldReturn_ListOfStringValue()
         {
-            string contentType = "";
-            object obj = (object)contentType;
+            const string contentType = "application/x-www-form-urlencoded";
+            object obj = contentType;
 
-            //TODO
+            var result = ConversionFactory.Convert<List<string>>("Content-Type", obj);
+
+            Assert.AreEqual("application/x-www-form-urlencoded", result[0]);
         }
 
+        [Ignore]
         [TestMethod]
         public void OriginAsObject_ShouldReturn_StringValue()
         {
-            string origin = "";
-            object obj = (object) origin;
+            const string origin = "";
+            object obj = origin;
 
             Assert.AreEqual(origin, ConversionFactory.Convert<string>("Origin", obj));
         }
@@ -163,8 +192,8 @@ namespace UnitTests
         [TestMethod]
         public void IfNoneMatchAsObject_ShouldReturn_StringValue()
         {
-            string ifNoneMatch = "";
-            object obj = (object)ifNoneMatch;
+            const string ifNoneMatch = "\"5086f4b5-2398\"";
+            object obj = ifNoneMatch;
 
             Assert.AreEqual(ifNoneMatch, ConversionFactory.Convert<string>("If-None-Match", obj));
         }

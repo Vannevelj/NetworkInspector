@@ -141,7 +141,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             }
             else
             {
-                _log.Warn(string.Format("Field {0} could not be found.", key));
+                _log.Warn(string.Format("Field \"{0}\" could not be found.", key));
             }
         }
 

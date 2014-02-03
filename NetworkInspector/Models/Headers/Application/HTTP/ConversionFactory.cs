@@ -19,7 +19,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         private static IEnumerable<string> GetStringEnumerableValue(object o, string delimiter)
         {
-            return ((string) o).Split(new[] {delimiter}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            return
+                ((string) o).Split(new[] {delimiter}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => x.Trim())
+                    .ToList();
         }
 
         private static IEnumerable<AcceptPreference> GetPreferenceEnumerableValue(object o, string delimiter)
@@ -28,13 +31,14 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
             return
                 entries.Select(entry => entry.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries))
-                    .Select(pairs => new AcceptPreference
+                    .Select((pairs, x) => new AcceptPreference
                     {
-                        Type = pairs[0],
+                        Type = pairs[0].Trim(),
                         Weight =
                             pairs.Length > 1
                                 ? Double.Parse(pairs[1].Trim().Substring(2), CultureInfo.InvariantCulture)
-                                : 1 // Substring the 'q=<value>' from the weight
+                                : 1, // Substring the 'q=<value>' from the weight
+                        Order = ++x
                     }).ToList();
         }
 
@@ -44,18 +48,18 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
             return
                 entries.Select(
-                    x => x.Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries))
+                    x => x.Split(new[] {"="}, 2, StringSplitOptions.RemoveEmptyEntries))
                     .Select(pairs => new Cookie
                     {
-                        Key = pairs[0],
-                        Value = pairs[1]
+                        Key = pairs[0].Trim(),
+                        Value = pairs[1].Trim()
                     }).ToList();
         }
 
         private static DateTime GetDateTimeValue(object o)
         {
             const string format = "ddd, dd MMM yyyy HH:mm:ss Z";
-            return DateTime.ParseExact((string) o, format, CultureInfo.InvariantCulture);
+            return DateTime.ParseExact((string) o, format, CultureInfo.InvariantCulture).ToUniversalTime();
         }
 
         public static T Convert<T>(string key, object value)
