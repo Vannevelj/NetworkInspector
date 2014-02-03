@@ -68,7 +68,8 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private string _cacheControl;
         private string _ifNoneMatch;
         private readonly List<CustomField> _customHeaders = new List<CustomField>();
-        private List<CharsetPreference> _acceptCharset; 
+        private List<CharsetPreference> _acceptCharset;
+        private string _range;
 
         public HTTPHeader(byte[] data, int length)
         {

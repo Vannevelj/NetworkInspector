@@ -73,4 +73,9 @@
     <HTTP>Accept-Charset</HTTP>
     <FIELD>_acceptCharset</FIELD>
   </PAIR>
+
+  <PAIR>
+    <HTTP>Range</HTTP>
+    <FIELD>_range</FIELD>
+  </PAIR>
 </PAIRS>

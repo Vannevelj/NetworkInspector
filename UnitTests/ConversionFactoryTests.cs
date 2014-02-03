@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
@@ -218,6 +219,15 @@ namespace UnitTests
             Assert.AreEqual("*", result[2].Charset);
             Assert.AreEqual(0.7, result[2].Weight);
             Assert.AreEqual(3, result[2].Order);
+        }
+
+        [TestMethod]
+        public void RangeAsObject_ShouldReturn_String()
+        {
+            const string range = "bytes=0-10783";
+            object obj = range;
+
+            Assert.AreEqual(range, ConversionFactory.Convert<string>("Range", obj));
         }
     }
 }

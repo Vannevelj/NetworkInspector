@@ -108,6 +108,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 case "Origin":
                 case "Host":
                 case "Accept-Language":
+                case "Range":
                     return (T) System.Convert.ChangeType(GetString(value), typeof (T));
 
                 case "Accept-Encoding":
