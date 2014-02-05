@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using log4net;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
 
 namespace NetworkInspector.Models.Headers.Application.HTTP
 {
     public class ConversionFactory
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private static string GetString(object o)
         {
             return (string) o;
@@ -45,10 +49,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         private static IEnumerable<CharsetPreference> GetCharsetPreferenceEnumerable(object o, string delimiter)
         {
-            var entries = ((string)o).Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+            var entries = ((string) o).Split(new[] {delimiter}, StringSplitOptions.RemoveEmptyEntries);
 
             return
-                entries.Select(entry => entry.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+                entries.Select(entry => entry.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries))
                     .Select((pairs, x) => new CharsetPreference
                     {
                         Charset = pairs[0].Trim(),
@@ -58,7 +62,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                                 : 1, // Substring the 'q=<value>' from the weight
                         Order = ++x
                     }).ToList();
-        } 
+        }
 
         private static IEnumerable<Cookie> GetCookieEnumerable(object o, string delimiter)
         {
@@ -76,8 +80,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         private static DateTime GetDateTime(object o)
         {
-            const string format = "ddd, dd MMM yyyy HH:mm:ss Z";
-            return DateTime.ParseExact((string) o, format, CultureInfo.InvariantCulture).ToUniversalTime();
+            DateTime date;
+            DateTime.TryParse((string) o, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            return date.ToUniversalTime();
         }
 
         private static CustomField GetCustomHeader(string key, object o)
@@ -87,17 +93,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 Key = key,
                 Value = (string) o
             };
-        } 
+        }
 
         public static T Convert<T>(string key, object value)
         {
-            // Handle custom headers
-            // http://stackoverflow.com/questions/3561381/custom-http-headers-naming-conventions/3561399#3561399
-            if (key.StartsWith("X-"))
-            {
-                return (T) System.Convert.ChangeType(GetCustomHeader(key, value), typeof(T));
-            }
-
             switch (key)
             {
                 case "Connection":
@@ -132,8 +131,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 case "If-Modified-Since":
                     return (T) System.Convert.ChangeType(GetDateTime(value), typeof (T));
 
+                    // If it's none of the above, it's a (deprecated) custom header 
+                    // http://stackoverflow.com/questions/3561381/custom-http-headers-naming-conventions/3561399#3561399
                 default:
-                    throw new ArgumentException();
+                    return (T) System.Convert.ChangeType(GetCustomHeader(key, value), typeof (T));
             }
         }
     }

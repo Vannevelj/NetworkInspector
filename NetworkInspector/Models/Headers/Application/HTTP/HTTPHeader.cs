@@ -50,6 +50,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         #endregion Conversions
 
+#pragma warning disable 649 // Disable the 'not assigned variable warning' -> reflection sets values
         private HTTPRequestType _requestType;
         private string _page;
         private Version _version;
@@ -70,6 +71,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private readonly List<CustomField> _customHeaders = new List<CustomField>();
         private List<CharsetPreference> _acceptCharset;
         private string _range;
+#pragma warning restore 649
 
         public HTTPHeader(byte[] data, int length)
         {
@@ -107,6 +109,9 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
             _page = fields[1];
             _version = fields[2] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
+            _log.Debug(string.Format("HTTP Request: {0}", _requestType));
+            _log.Debug(string.Format("Page: {0}", _page));
+            _log.Debug(string.Format("HTTP Version: {0}", _version));
         }
 
         private void ParseField(string field)
@@ -127,7 +132,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             {
                 ConvertData(conversion.ObjectValue, conversion.HTTPValue, value);
             }
-            else if (IsCustomHeader(key))
+            else if (IsCustomHeader(key) || IsDeprecatedCustomHeader(key, value))
             {
                 AddCustomHeader(key, value);
             }
@@ -154,7 +159,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
                 var result = method.Invoke(this, new object[] {key, value});
                 obj.SetValue(this, result);
-               
+
                 _log.Debug(string.Format("{0}: {1}", key, value));
             }
         }
@@ -167,7 +172,13 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         private bool IsCustomHeader(string key)
         {
-            return key.StartsWith("X-");
+            return key.StartsWith("X-") || key.StartsWith("x-");
+        }
+
+        // Custom headers should start with 'X-' but this wasn't always done so.
+        private bool IsDeprecatedCustomHeader(string key, string value)
+        {
+            return key.Trim().Length >= 1 && value.Trim().Length >= 1;
         }
 
         public Protocol ProtocolName
@@ -210,6 +221,9 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             get { return _cacheControl; }
         }
 
+        /// <summary>
+        ///     Returns <code>DateTime.MinValue</code> if no date could be parsed. Dates are returned in UTC time.
+        /// </summary>
         public DateTime IfModifiedSince
         {
             get { return _ifModifiedSince; }
@@ -248,6 +262,16 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         public string IfNoneMatch
         {
             get { return _ifNoneMatch; }
+        }
+
+        public IEnumerable<CharsetPreference> CharsetPreferences
+        {
+            get { return _acceptCharset; }
+        }
+
+        public string Range
+        {
+            get { return _range; }
         }
     }
 }

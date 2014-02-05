@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
@@ -99,9 +98,32 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void IfModifiedSinceAsObject_ShouldReturn_DateTime()
+        public void IfModifiedSinceWithTimezoneFormatAsZAsObject_ShouldReturn_DateTime()
         {
             const string ifModifiedSince = "Sun, 02 Feb 2014 09:46:17 GMT";
+            const int year = 2014;
+            const int month = 2;
+            const int day = 2;
+            const int hour = 9;
+            const int minute = 46;
+            const int second = 17;
+
+            object obj = ifModifiedSince;
+
+            var result = ConversionFactory.Convert<DateTime>("If-Modified-Since", obj);
+
+            Assert.AreEqual(year, result.Year);
+            Assert.AreEqual(month, result.Month);
+            Assert.AreEqual(day, result.Day);
+            Assert.AreEqual(hour, result.Hour);
+            Assert.AreEqual(minute, result.Minute);
+            Assert.AreEqual(second, result.Second);
+        }
+
+        [TestMethod]
+        public void IfModifiedSinceWithTimezoneFormatAszzzAsObject_ShouldReturn_DateTime()
+        {
+            const string ifModifiedSince = "Sun, 02 Feb 2014 09:46:17 +0000";
             const int year = 2014;
             const int month = 2;
             const int day = 2;
@@ -158,17 +180,6 @@ namespace UnitTests
             object obj = contentLength;
 
             Assert.AreEqual(Int32.Parse(contentLength), ConversionFactory.Convert<int>("Content-Length", obj));
-        }
-
-        [TestMethod]
-        public void MultipleCustomHeadersAsObjects_ShouldReturn_ListOfCustomHeaders()
-        {
-            const string key1 = "X-Requested-With";
-            const string value1 = "XMLHttpRequest";
-
-            const string key2 = "X-Chrome-Variations";
-            const string value2 = "CNa1yQEIjrbJAQiYtskBCKK2yQEIp7bJAQiptskBCLmDygE=";
-
         }
 
         [TestMethod]

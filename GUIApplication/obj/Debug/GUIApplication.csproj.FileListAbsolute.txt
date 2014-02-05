@@ -1,6 +1,0 @@
-D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.exe.config
-D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.exe
-D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.pdb
-D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.csprojResolveAssemblyReference.cache
-D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.exe
-D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.pdb
