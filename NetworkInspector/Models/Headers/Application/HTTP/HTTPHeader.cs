@@ -186,6 +186,21 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             get { return Protocol.HTTP; }
         }
 
+        public HTTPRequestType RequestType
+        {
+            get { return _requestType; }
+        }
+
+        public string Page
+        {
+            get { return _page; }
+        }
+
+        public Version HTTPVersion
+        {
+            get { return _version; }
+        }
+
         public string Host
         {
             get { return _host; }

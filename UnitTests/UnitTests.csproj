@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="ConversionFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HTTPHeaderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetworkInspector\NetworkInspector.csproj">
