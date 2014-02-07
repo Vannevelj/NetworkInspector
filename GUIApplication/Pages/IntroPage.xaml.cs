@@ -27,7 +27,7 @@ namespace GUIApplication.Pages
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {     
-            var action = this.AppsListBox.SelectedIndex;
+            var action = AppsListBox.SelectedIndex;
 
             switch (action)
             {
