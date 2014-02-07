@@ -1,0 +1,17 @@
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.csprojResolveAssemblyReference.cache
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\MainWindow.baml
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\MainWindow.g.cs
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\App.g.cs
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication_MarkupCompile.cache
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.g.resources
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.Properties.Resources.resources
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.csproj.GenerateResource.Cache
+D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.exe.config
+D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.exe
+D:\Github\NetworkInspector\GUIApplication\bin\Debug\GUIApplication.pdb
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\Pages\IntroPage.baml
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\Pages\IntroPage.g.cs
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.exe
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\GUIApplication.pdb
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\Pages\BandwidthMonitorPage.baml
+D:\Github\NetworkInspector\GUIApplication\obj\Debug\Pages\BandwidthMonitorPage.g.cs
