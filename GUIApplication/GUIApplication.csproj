@@ -65,7 +65,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BandwidthMonitorPage.xaml">
+    <Page Include="Pages\PacketTracerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,8 +75,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\BandwidthMonitorPage.xaml.cs">
-      <DependentUpon>BandwidthMonitorPage.xaml</DependentUpon>
+    <Compile Include="Pages\PacketTracerPage.xaml.cs">
+      <DependentUpon>PacketTracerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
@@ -108,9 +108,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\glass.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

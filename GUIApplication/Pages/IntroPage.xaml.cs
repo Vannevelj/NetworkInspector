@@ -24,5 +24,28 @@ namespace GUIApplication.Pages
         {
             InitializeComponent();
         }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {     
+            var action = this.AppsListBox.SelectedIndex;
+
+            switch (action)
+            {
+                case 0:
+                    //NavigationService.Navigate(new BandwidthMonitorPage());
+                    break;
+
+                case 1:
+                    NavigationService.Navigate(new PacketTracerPage());
+                    break;
+
+                    // Nothing is selected
+                case -1:
+                    break;
+
+                default: 
+                    throw new ArgumentException();
+            }
+        }
     }
 }
