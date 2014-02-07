@@ -7,13 +7,3 @@ C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\obj\Debug\Net
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.exe.config
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.exe
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.config
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\Models\Headers\Application\HTTP\conversions.xml
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.dll.config
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.dll
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.pdb
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.dll
-D:\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.xml
-D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojResolveAssemblyReference.cache
-D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.dll
-D:\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
