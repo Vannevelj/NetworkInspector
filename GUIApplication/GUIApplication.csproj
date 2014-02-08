@@ -65,22 +65,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\PacketTracerPage.xaml">
+    <Page Include="Pages\PacketTracer\PacketTracerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\IntroPage.xaml">
+    <Page Include="Pages\Intro\IntroPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\PacketTracerPage.xaml.cs">
+    <Compile Include="Pages\PacketTracer\PacketTracerPage.xaml.cs">
       <DependentUpon>PacketTracerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\IntroPage.xaml.cs">
+    <Compile Include="Pages\Intro\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Shared\NetworkInterfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkInspector\NetworkInspector.csproj">
+      <Project>{ba7104f9-1b8a-425b-a4a2-d56f24ef148d}</Project>
+      <Name>NetworkInspector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

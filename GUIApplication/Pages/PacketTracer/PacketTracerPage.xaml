@@ -1,0 +1,77 @@
+﻿<Page x:Class="GUIApplication.Pages.PacketTracerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:shared="clr-namespace:GUIApplication.Pages.Shared"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="600"
+	  Title="Packet Tracer">
+
+    <DockPanel LastChildFill="True">
+        <DockPanel.Resources>
+            <shared:NetworkInterfaces x:Key="NetworkInterfaces"/>
+        </DockPanel.Resources>
+        
+        <!--Network interface label-->
+        <Border Height="40" Background="Turquoise" BorderBrush="Black"
+                BorderThickness="1" DockPanel.Dock="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="250" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label 
+                   Grid.Column="0"
+                   Content="A network interface"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   Name="NetworkInterfaceLabel"
+                />
+
+                <ComboBox 
+                      Grid.Column="1"
+                      Name="NetworkInterfaceComboBox"
+                      ItemsSource="{StaticResource NetworkInterfaces}"
+                      IsEditable="False"
+                      IsReadOnly="True"
+                      Margin="0 5 10 5"
+                />
+            </Grid>     
+        </Border>
+
+        <!--Bottom label-->
+        <Border Height="25" Background="DarkTurquoise" BorderBrush="Black" 
+                BorderThickness="1" DockPanel.Dock="Bottom">
+            <TextBlock Foreground="Black">I'll have to figure this out</TextBlock>
+        </Border>
+      
+        <!--Packet list-->
+        <Border Width="200" BorderBrush="Black"
+                BorderThickness="1" DockPanel.Dock="Left">
+            <ListView Background="Aquamarine"
+                      Name="PacketList"
+                      >
+            </ListView>
+        </Border>
+
+        <!--Detail panel-->
+        <Border Height="150" Background="Aquamarine" BorderBrush="Black" 
+                BorderThickness="1" DockPanel.Dock="Bottom">
+            <TextBlock Foreground="Black">Detail panel with the values</TextBlock>
+        </Border>
+
+        <!--Data field panel-->
+        <Border Background="White" BorderBrush="Black" BorderThickness="1">
+            <TextBlock Foreground="Black"
+                       Name="PacketDetails">All possible data fields</TextBlock>
+            
+        </Border>       
+    </DockPanel>
+</Page>

@@ -25,14 +25,21 @@ namespace GUIApplication.Pages
         {
             InitializeComponent();
 
+            // Display the standard text in the combobox
+            NetworkInterfaceComboBox.SelectedIndex = 0;
+
             for (int i = 0; i < 5; i++)
             {
                 PacketList.Items.Add("Item " + i);
-                PacketList.SelectionChanged += Item_Selected;
             }
+
+            // Event handlers
+            PacketList.SelectionChanged += PacketList_ItemSelected;
         }
 
-        private void Item_Selected(object sender, SelectionChangedEventArgs e)
+
+
+        private void PacketList_ItemSelected(object sender, SelectionChangedEventArgs e)
         {
             PacketDetails.Text = (string) PacketList.SelectedItem;
         }
