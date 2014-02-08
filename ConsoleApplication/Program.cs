@@ -4,8 +4,8 @@ using System.Reflection;
 using log4net;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Network;
-using NetworkInspector.Network.BandwidthMonitoringUtilities;
-using NetworkInspector.Network.PacketTracingUtilities;
+using NetworkInspector.Network.BandwidthMonitoring;
+using NetworkInspector.Network.PacketTracing;
 
 namespace ConsoleApplication
 {

@@ -13,7 +13,7 @@
             <shared:NetworkInterfaces x:Key="NetworkInterfaces"/>
         </DockPanel.Resources>
         
-        <!--Network interface label-->
+        <!--Top bar-->
         <Border Height="40" Background="Turquoise" BorderBrush="Black"
                 BorderThickness="1" DockPanel.Dock="Top">
             <Grid>
@@ -37,6 +37,7 @@
                    Name="NetworkInterfaceLabel"
                 />
 
+                <!--Should be moved to the bandwidth monitor-->
                 <ComboBox 
                       Grid.Column="1"
                       Name="NetworkInterfaceComboBox"
@@ -99,7 +100,7 @@
                 <Label 
                    Grid.Column="0"
                    Grid.Row="1"
-                   Content="1567"
+                   Content="0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Name="AmountOfPacketsSentLabel"
@@ -118,7 +119,7 @@
                 <Label 
                    Grid.Column="1"
                    Grid.Row="1"
-                   Content="235"
+                   Content="0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Name="AmountOfPacketsReceivedLabel"

@@ -80,7 +80,7 @@
     <Compile Include="Models\Headers\Transport\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />
-    <Compile Include="Network\BandwidthMonitoringUtilities\NetworkStatisticsEventArgs.cs" />
+    <Compile Include="Network\BandwidthMonitoring\NetworkStatisticsEventArgs.cs" />
     <Compile Include="Models\INetworkStatistics.cs" />
     <Compile Include="Models\Headers\Application\DNS\DNSHeader.cs" />
     <Compile Include="Models\Headers\Network\IPHeader.cs" />
@@ -89,9 +89,9 @@
     <Compile Include="Models\Headers\Transport\UDPHeader.cs" />
     <Compile Include="Models\Packets\UDPPacket.cs" />
     <Compile Include="Models\NetworkStatistics.cs" />
-    <Compile Include="Network\PacketTracingUtilities\PacketTracer.cs" />
-    <Compile Include="Network\PacketTracingUtilities\PacketTracerEventArgs.cs" />
-    <Compile Include="Network\BandwidthMonitoringUtilities\BandwidthMonitor.cs" />
+    <Compile Include="Network\PacketTracing\PacketTracer.cs" />
+    <Compile Include="Network\PacketTracing\PacketTracerEventArgs.cs" />
+    <Compile Include="Network\BandwidthMonitoring\BandwidthMonitor.cs" />
     <Compile Include="Network\Utilities.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
