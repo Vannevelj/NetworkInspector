@@ -1,4 +1,4 @@
-﻿<Page x:Class="GUIApplication.Pages.PacketTracerPage"
+﻿<Page x:Class="GUIApplication.Pages.PacketTracer.PacketTracerPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,6 +20,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -43,13 +45,88 @@
                       IsReadOnly="True"
                       Margin="0 5 10 5"
                 />
+                
+                <Button
+                    Grid.Column="2"
+                    Name="StartButton"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Click="StartButton_OnClick"
+                    ClickMode="Release"
+                    Content="Start"
+                    Margin="0 5 10 5"
+                    />
+
+                <Button
+                    Grid.Column="3"
+                    Name="StopButton"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Click="StopButton_OnClick"
+                    ClickMode="Release"
+                    Content="Stop"
+                    Margin="0 5 10 5"
+                    />
             </Grid>     
         </Border>
 
         <!--Bottom label-->
-        <Border Height="25" Background="DarkTurquoise" BorderBrush="Black" 
+        <Border Height="60" Background="DarkTurquoise" BorderBrush="Black" 
                 BorderThickness="1" DockPanel.Dock="Bottom">
-            <TextBlock Foreground="Black">I'll have to figure this out</TextBlock>
+            <Grid ShowGridLines="True" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label 
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Content="# of packets sent"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="16"
+                   Name="AmountOfPacketsSentHeaderLabel" 
+                />
+                      
+                <Label 
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   Content="1567"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Name="AmountOfPacketsSentLabel"
+                />
+
+                <Label 
+                   Grid.Column="1"
+                   Grid.Row="0"
+                   Content="# of packets received"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   Name="AmountOfPacketsReceivedHeaderLabel"
+                />
+
+                <Label 
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   Content="235"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Name="AmountOfPacketsReceivedLabel"
+                />
+
+
+
+            </Grid>       
         </Border>
       
         <!--Packet list-->
