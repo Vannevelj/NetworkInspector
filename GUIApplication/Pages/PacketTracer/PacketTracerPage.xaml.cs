@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,8 +18,8 @@ namespace GUIApplication.Pages.PacketTracer
         private int _packetsSent;
 
         private const int MaxPackets = 4096;
-        private readonly Packet[] _packets = new Packet[MaxPackets]; // Most recent packets
-        private int _selectedPacket, _amountOfPackets;
+        private readonly Packet[] _packets = new Packet[4096];
+        private int _selectedPacket;
  
 
         public PacketTracerPage()
@@ -42,8 +43,8 @@ namespace GUIApplication.Pages.PacketTracer
         private void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
             _tracer = new NetworkInspector.Network.PacketTracing.PacketTracer();
-            _tracer.OnPacketReceived += PacketReceived;
             _tracer.OnPacketReceived += IncrementPacketsSent;
+            _tracer.OnPacketReceived += PacketSent;
 
             _tracerThread = new Thread(_tracer.Capture);
             _tracerThread.Start();
@@ -55,23 +56,22 @@ namespace GUIApplication.Pages.PacketTracer
             _tracerThread.Abort();
         }
 
-        private void PacketReceived(object sender, PacketTracerEventArgs e)
+        private void PacketSent(object sender, PacketTracerEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
                 var item = string.Format("{0}: {1}", e.Packet.PacketType, e.Packet.NetworkHeader.DestIP);
 
-                ++_amountOfPackets;
-                if (_amountOfPackets >= MaxPackets)
+                if (_packetsSent >= MaxPackets)
                 {
+                    Array.Copy(_packets, 1, _packets, 0, _packets.Length - 1);
                     PacketList.Items.RemoveAt(0);
                 }
 
-                _packets[_amountOfPackets] = e.Packet;
+                _packets[_packetsSent % MaxPackets] = e.Packet;
                 PacketList.Items.Add(item);
                 PacketList.ScrollIntoView(item);
             });
-
         }
 
         private void IncrementPacketsSent(object sender, PacketTracerEventArgs e)
