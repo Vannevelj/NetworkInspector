@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
@@ -18,7 +19,7 @@ namespace NetworkInspector.Models.Packets
 
     public abstract class Packet
     {
-        public abstract Protocol PacketType { get; }
+        public abstract Protocol PacketType { get; } // TODO: what protocol are we defining here?
 
         public IHeader ApplicationHeader { get; set; }
 
@@ -57,6 +58,15 @@ namespace NetworkInspector.Models.Packets
                 default:
                     throw new ArgumentException();
             }
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append(string.Format("Time received: {0}\n", Received));
+            builder.Append(string.Format("{0}\n", NetworkHeader));
+            builder.Append(string.Format("{0}\n", ApplicationHeader));
+            return builder.ToString();
         }
     }
 }
