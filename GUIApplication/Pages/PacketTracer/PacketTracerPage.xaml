@@ -3,16 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:shared="clr-namespace:GUIApplication.Pages.Shared"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
 	  Title="Packet Tracer">
 
-    <DockPanel LastChildFill="True">
-        <DockPanel.Resources>
-            <shared:NetworkInterfaces x:Key="NetworkInterfaces"/>
-        </DockPanel.Resources>
-        
+    <DockPanel LastChildFill="True">       
         <!--Top bar-->
         <Border Height="40" Background="Turquoise" BorderBrush="Black"
                 BorderThickness="1" DockPanel.Dock="Top">
@@ -35,16 +30,6 @@
                    VerticalAlignment="Center"
                    FontSize="16"
                    Name="NetworkInterfaceLabel"
-                />
-
-                <!--Should be moved to the bandwidth monitor-->
-                <ComboBox 
-                      Grid.Column="1"
-                      Name="NetworkInterfaceComboBox"
-                      ItemsSource="{StaticResource NetworkInterfaces}"
-                      IsEditable="False"
-                      IsReadOnly="True"
-                      Margin="0 5 10 5"
                 />
                 
                 <Button
@@ -139,17 +124,26 @@
             </ListView>
         </Border>
 
-        <!--Detail panel-->
-        <Border Height="150" Background="Aquamarine" BorderBrush="Black" 
-                BorderThickness="1" DockPanel.Dock="Bottom">
-            <TextBlock Foreground="Black">Detail panel with the values</TextBlock>
-        </Border>
-
         <!--Data field panel-->
         <Border Background="White" BorderBrush="Black" BorderThickness="1">
-            <TextBlock Foreground="Black"
-                       Name="PacketDetails">All possible data fields</TextBlock>
-            
+
+            <DataGrid 
+                Name="FieldGrid"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="cKey" 
+                                        Binding="{Binding Key}" 
+                                        Header="Key"
+                                        Width="2*"/>
+                    <DataGridTextColumn x:Name="cValue" 
+                                        Binding="{Binding Value}" 
+                                        Header="Value"
+                                        Width="8*"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
         </Border>       
     </DockPanel>
 </Page>

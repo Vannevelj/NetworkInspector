@@ -1,5 +1,5 @@
 ﻿<NavigationWindow x:Class="GUIApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="400" Width="800" Source="/Pages/Intro/IntroPage.xaml">
+        Title="MainWindow" Height="550" Width="1000" Source="/Pages/Intro/IntroPage.xaml">
 </NavigationWindow>

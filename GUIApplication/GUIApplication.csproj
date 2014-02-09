@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="vm\PacketViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,7 +82,7 @@
     <Compile Include="Pages\Intro\IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Shared\NetworkInterfaces.cs" />
+    <Compile Include="Shared\NetworkInterfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
