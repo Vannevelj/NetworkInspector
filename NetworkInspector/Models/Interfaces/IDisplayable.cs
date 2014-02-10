@@ -8,6 +8,6 @@ namespace NetworkInspector.Models.Interfaces
 {
     public interface IDisplayable
     {
-        Dictionary<string, string> GetFieldRepresentation {get; set; }
+        Dictionary<string, string> GetFieldRepresentation();
     }
 }

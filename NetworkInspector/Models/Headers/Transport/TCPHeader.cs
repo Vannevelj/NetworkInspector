@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using NetworkInspector.Models.Headers.Interfaces;
+using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
 namespace NetworkInspector.Models.Headers.Transport
 {
-    public class TCPHeader : IHeader
+    public class TCPHeader : IHeader, IDisplayable
     {
         private readonly ushort _usSourcePort; // 16 bits
 
@@ -156,6 +157,11 @@ namespace NetworkInspector.Models.Headers.Transport
         {
             return string.Format("TCP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
                 _usMessageLength);
+        }
+
+        public Dictionary<string, string> GetFieldRepresentation()
+        {
+            throw new NotImplementedException();
         }
     }
 }

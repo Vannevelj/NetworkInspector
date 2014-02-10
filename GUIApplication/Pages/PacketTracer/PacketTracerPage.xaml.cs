@@ -43,7 +43,13 @@ namespace GUIApplication.Pages.PacketTracer
             _selectedPacket = PacketList.SelectedIndex;
             var packet = _packets[_selectedPacket];
 
-            PacketDetails.Add(new PacketViewModel{Key = "Time received", Value = packet.Received.ToString()});
+            //PacketDetails.Add(new PacketViewModel{Key = "Time received", Value = packet.Received.ToString()});
+
+            foreach (var p in packet.GetFieldRepresentation())
+            {
+                PacketDetails.Add(new PacketViewModel {Key = p.Key, Value = p.Value});
+            }
+
             FieldGrid.DataContext = PacketDetails;
         }
 
@@ -67,7 +73,7 @@ namespace GUIApplication.Pages.PacketTracer
         {
             Dispatcher.Invoke(() =>
             {
-                var item = string.Format("{0}: {1}", e.Packet.PacketType, e.Packet.NetworkHeader.DestIP);
+                var item = string.Format("{0}: {1}", e.Packet.PacketType, e.Packet.NetworkHeader.DestinationIP);
 
                 if (_packetsSent >= MaxPackets)
                 {

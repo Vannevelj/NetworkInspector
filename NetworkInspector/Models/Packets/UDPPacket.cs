@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 
@@ -9,6 +10,11 @@ namespace NetworkInspector.Models.Packets
         public override Protocol PacketType
         {
             get { return Protocol.UDP; }
+        }
+
+        public override Dictionary<string, string> GetFieldRepresentation()
+        {
+            return new Dictionary<string, string>();
         }
 
         public UDPHeader TransportHeader { get; set; }

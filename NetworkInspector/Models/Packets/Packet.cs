@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
@@ -70,5 +71,7 @@ namespace NetworkInspector.Models.Packets
             builder.Append(string.Format("{0}\n", ApplicationHeader));
             return builder.ToString();
         }
+
+        public abstract Dictionary<string, string> GetFieldRepresentation();
     }
 }

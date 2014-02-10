@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using NetworkInspector.Extensions;
 using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
+using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
 namespace NetworkInspector.Models.Headers.Network
 {
-    public class IPHeader : IHeader
+    public class IPHeader : IHeader, IDisplayable
     {
         private readonly byte _byVersionAndHeaderLength; // 8 bits
 
@@ -139,7 +142,7 @@ namespace NetworkInspector.Models.Headers.Network
             get { return new IPAddress(_uiSourceIP); }
         }
 
-        public IPAddress DestIP
+        public IPAddress DestinationIP
         {
             get { return new IPAddress(_uiDestIP); }
         }
@@ -162,6 +165,26 @@ namespace NetworkInspector.Models.Headers.Network
         public Protocol ProtocolName
         {
             get { return Protocol.IP; }
+        }
+
+        public Dictionary<string, string> GetFieldRepresentation()
+        {
+            return new Dictionary<string, string>()
+            {
+               { "Network Layer Protocol", ProtocolName.ToString() },
+               { "Version", Version },
+               { "Source IP", SourceIP.ToString() },
+               { "Destination IP", DestinationIP.ToString() },
+               { "TTL", TTL },
+               { "Checksum", Checksum },
+               { "Differentiated Services", DifferentiatedServices },
+               { "Flags", Flags },
+               { "Fragmentation offset", FragmentationOffset },
+               { "IP header length", HeaderLength },
+               { "IP message length", MessageLength.ToString() },
+               { "Total length", TotalLength },
+               { "Identification", Identification },
+            };
         }
     }
 }

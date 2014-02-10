@@ -9,6 +9,7 @@ using log4net;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
 using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
+using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 using Cookie = NetworkInspector.Models.Headers.Application.HTTP.HeaderFields.Cookie;
 
@@ -27,7 +28,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         PATCH
     }
 
-    public class HTTPHeader : IHeader
+    public class HTTPHeader : IHeader, IDisplayable
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly List<Conversion> _conversions = new List<Conversion>();
@@ -288,6 +289,11 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         public string Range
         {
             get { return _range; }
+        }
+
+        public Dictionary<string, string> GetFieldRepresentation()
+        {
+            throw new NotImplementedException();
         }
     }
 }

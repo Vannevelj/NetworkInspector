@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Models.Headers.Interfaces;
 
 namespace NetworkInspector.Models.Headers.Transport
 {
-    public class UDPHeader : IHeader
+    public class UDPHeader : IHeader, IDisplayable
     {
         private readonly ushort _usSourcePort; // 16 bits
 
@@ -68,6 +70,11 @@ namespace NetworkInspector.Models.Headers.Transport
         {
             return string.Format("UDP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
                 Length);
+        }
+
+        public Dictionary<string, string> GetFieldRepresentation()
+        {
+            throw new NotImplementedException();
         }
     }
 }
