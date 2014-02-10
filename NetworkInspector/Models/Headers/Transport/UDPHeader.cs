@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using NetworkInspector.Models.Packets;
+using NetworkInspector.Models.Headers.Interfaces;
 
 namespace NetworkInspector.Models.Headers.Transport
 {

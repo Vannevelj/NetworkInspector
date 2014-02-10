@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
 

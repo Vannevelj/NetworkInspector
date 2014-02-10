@@ -2,8 +2,10 @@
 using System.Text;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
+using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
+using NetworkInspector.Models.Interfaces;
 
 namespace NetworkInspector.Models.Packets
 {
@@ -17,7 +19,7 @@ namespace NetworkInspector.Models.Packets
         UNKNOWN
     }
 
-    public abstract class Packet
+    public abstract class Packet : IDisplayable
     {
         public abstract Protocol PacketType { get; } // TODO: what protocol are we defining here?
 

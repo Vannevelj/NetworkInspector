@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using log4net;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
+using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
 using Cookie = NetworkInspector.Models.Headers.Application.HTTP.HeaderFields.Cookie;

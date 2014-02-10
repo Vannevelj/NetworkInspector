@@ -77,7 +77,8 @@
     <Compile Include="Models\Headers\Application\HTTP\HeaderFields\CustomField.cs" />
     <Compile Include="Models\Headers\Application\HTTP\HTTPHeader.cs" />
     <Compile Include="Models\Headers\Application\HTTP\HeaderFields\CulturePreference.cs" />
-    <Compile Include="Models\Headers\Transport\IHeader.cs" />
+    <Compile Include="Models\Interfaces\IDisplayable.cs" />
+    <Compile Include="Models\Interfaces\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
     <Compile Include="Models\TransferRate.cs" />
     <Compile Include="Network\BandwidthMonitoring\NetworkStatisticsEventArgs.cs" />
