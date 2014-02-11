@@ -1,8 +1,8 @@
 ﻿using NetworkInspector.Models.Packets;
 
-namespace NetworkInspector.Models.Headers.Interfaces
+namespace NetworkInspector.Models.Interfaces
 {
-    public interface IHeader
+    public interface IHeader : IDisplayable
     {
         Protocol ProtocolName { get; }
     }

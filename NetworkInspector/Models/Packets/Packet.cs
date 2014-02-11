@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NetworkInspector.Extensions;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
-using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
@@ -25,6 +25,8 @@ namespace NetworkInspector.Models.Packets
         public abstract Protocol PacketType { get; } // TODO: what protocol are we defining here?
 
         public IHeader ApplicationHeader { get; set; }
+
+        public IHeader TransportHeader { get; set; }
 
         public IPHeader NetworkHeader { get; set; }
 
@@ -53,7 +55,7 @@ namespace NetworkInspector.Models.Packets
                     var udp = (UDPHeader) header;
                     if (udp.SourcePort == 53 || udp.DestinationPort == 53)
                     {
-                        ApplicationHeader = new DNSHeader(udp.Data, udp.Length - 8);
+                        ApplicationHeader = new DNSHeader(udp.Data, udp.MessageLength - 8);
                     }
                 }
                     break;
@@ -72,6 +74,18 @@ namespace NetworkInspector.Models.Packets
             return builder.ToString();
         }
 
-        public abstract Dictionary<string, string> GetFieldRepresentation();
+        public Dictionary<string, string> GetFieldRepresentation()
+        {
+            var dic = new Dictionary<string, string>()
+            {
+               {"Received", Received.ToString()},
+            };
+
+            dic.AddRange(NetworkHeader.GetFieldRepresentation());
+            dic.AddRange(TransportHeader.GetFieldRepresentation());
+            dic.AddRange(ApplicationHeader.GetFieldRepresentation());
+
+            return dic;
+        }
     }
 }

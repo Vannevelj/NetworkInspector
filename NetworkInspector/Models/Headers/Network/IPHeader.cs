@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using NetworkInspector.Extensions;
-using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;

@@ -122,7 +122,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 case "Accept":
                     return (T) GetAcceptPreferenceEnumerable(value, ",");
 
-                case "Content-Length":
+                case "Content-MessageLength":
                     return (T) System.Convert.ChangeType(GetInt(value), typeof (T));
 
                 case "Cookie":

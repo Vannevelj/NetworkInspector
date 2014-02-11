@@ -119,7 +119,7 @@ namespace ConsoleApplication
             Console.WriteLine("Time received:\t\t{0}", tcp.Received.ToLongTimeString());
             Console.WriteLine("Packet type:\t\t{0}", tcp.TransportHeader.ProtocolName);
             Console.WriteLine("TTL:\t\t\t{0}", tcp.NetworkHeader.TTL);
-            Console.WriteLine("Length:\t\t\t{0}", tcp.NetworkHeader.MessageLength);
+            Console.WriteLine("MessageLength:\t\t\t{0}", tcp.NetworkHeader.MessageLength);
             Console.WriteLine("Source IP:\t\t{0}", tcp.NetworkHeader.SourceIP);
             Console.WriteLine("Destination IP:\t\t{0}", tcp.NetworkHeader.DestinationIP);
             Console.WriteLine("Protocol:\t\t{0}", tcp.NetworkHeader.ProtocolType);
@@ -137,7 +137,7 @@ namespace ConsoleApplication
             Console.WriteLine("Time received:\t\t{0}", udp.Received.ToLongTimeString());
             Console.WriteLine("Packet type:\t\t{0}", udp.TransportHeader.ProtocolName);
             Console.WriteLine("TTL:\t\t\t{0}", udp.NetworkHeader.TTL);
-            Console.WriteLine("Length:\t\t\t{0}", udp.NetworkHeader.MessageLength);
+            Console.WriteLine("MessageLength:\t\t\t{0}", udp.NetworkHeader.MessageLength);
             Console.WriteLine("Source IP:\t\t{0}", udp.NetworkHeader.SourceIP);
             Console.WriteLine("Destination IP:\t\t{0}", udp.NetworkHeader.DestinationIP);
             Console.WriteLine("Protocol:\t\t{0}", udp.NetworkHeader.ProtocolType);

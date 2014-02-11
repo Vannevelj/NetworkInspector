@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
 namespace NetworkInspector.Models.Headers.Transport
 {
-    public class TCPHeader : IHeader, IDisplayable
+    public class TCPHeader : IHeader
     {
         private readonly ushort _usSourcePort; // 16 bits
 
@@ -155,13 +154,26 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public override string ToString()
         {
-            return string.Format("TCP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
+            return string.Format("TCP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort, DestinationPort,
                 _usMessageLength);
         }
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            throw new NotImplementedException();
+            return new Dictionary<string, string>()
+            {
+                {"Transport Header Protocol", ProtocolName.ToString()},
+                {"Source port", SourcePort.ToString()},
+                {"Destination port", DestinationPort.ToString()},
+                {"Message length", MessageLength.ToString()},
+                {"Header length", HeaderLength.ToString()},
+                {"Sequence number", SequenceNumber.ToString()},
+                {"Window size", WindowSize.ToString()},
+                {"Flags", string.Join(",", Flags)},
+                {"Checksum", Checksum},
+                {"ACK number", AcknowledgementNumber.ToString()},
+                {"URG pointer", UrgentPointer.ToString()}
+            };
         }
     }
 }

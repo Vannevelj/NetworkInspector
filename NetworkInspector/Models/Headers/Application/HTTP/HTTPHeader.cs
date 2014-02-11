@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Xml.Linq;
 using log4net;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
-using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
@@ -28,7 +27,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         PATCH
     }
 
-    public class HTTPHeader : IHeader, IDisplayable
+    public class HTTPHeader : IHeader
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly List<Conversion> _conversions = new List<Conversion>();
@@ -293,7 +292,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            throw new NotImplementedException();
+            return new Dictionary<string, string>()
+            {
+                {}
+            };
         }
     }
 }

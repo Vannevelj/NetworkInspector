@@ -12,13 +12,6 @@ namespace NetworkInspector.Models.Packets
             get { return Protocol.UDP; }
         }
 
-        public override Dictionary<string, string> GetFieldRepresentation()
-        {
-            return new Dictionary<string, string>();
-        }
-
-        public UDPHeader TransportHeader { get; set; }
-
         public UDPPacket(IPHeader ip, UDPHeader udp)
         {
             NetworkHeader = ip;

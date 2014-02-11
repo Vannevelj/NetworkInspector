@@ -4,11 +4,10 @@ using System.IO;
 using System.Net;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
-using NetworkInspector.Models.Headers.Interfaces;
 
 namespace NetworkInspector.Models.Headers.Transport
 {
-    public class UDPHeader : IHeader, IDisplayable
+    public class UDPHeader : IHeader
     {
         private readonly ushort _usSourcePort; // 16 bits
 
@@ -46,7 +45,7 @@ namespace NetworkInspector.Models.Headers.Transport
             get { return Convert.ToInt32(_usDestinationPort); }
         }
 
-        public int Length
+        public int MessageLength
         {
             get { return Convert.ToInt32(_usLength); }
         }
@@ -68,13 +67,21 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public override string ToString()
         {
-            return string.Format("UDP - Source: {0} - Destination: {1} - Length: {2}", SourcePort, DestinationPort,
-                Length);
+            return string.Format("UDP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort, DestinationPort,
+                MessageLength);
         }
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            throw new NotImplementedException();
+            return new Dictionary<string, string>()
+            {
+                {"Transport Header Protocol ", ProtocolName.ToString()},
+                {"Source port", SourcePort.ToString()},
+                {"Destination port", DestinationPort.ToString()},
+                {"Message length", MessageLength.ToString()},
+                {"Checksum", Checksum},
+                //{"TEST: DATA", System.Text.Encoding.Default.GetString(Data)}
+            };
         }
     }
 }

@@ -179,7 +179,7 @@ namespace UnitTests
             const string contentLength = "398";
             object obj = contentLength;
 
-            Assert.AreEqual(Int32.Parse(contentLength), ConversionFactory.Convert<int>("Content-Length", obj));
+            Assert.AreEqual(Int32.Parse(contentLength), ConversionFactory.Convert<int>("Content-MessageLength", obj));
         }
 
         [TestMethod]

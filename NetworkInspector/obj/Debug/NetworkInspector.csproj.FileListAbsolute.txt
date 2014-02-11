@@ -4,3 +4,13 @@ C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\bin\Debug\Net
 C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.exe
 C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb
 C:\Users\Jeroen\Documents\GitHub\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojResolveAssemblyReference.cache
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.config
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\Models\Headers\Application\HTTP\conversions.xml
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.dll.config
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\NetworkInspector.pdb
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Debug\log4net.xml
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.csprojResolveAssemblyReference.cache
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.dll
+C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Debug\NetworkInspector.pdb

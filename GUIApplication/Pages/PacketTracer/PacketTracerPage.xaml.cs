@@ -43,8 +43,6 @@ namespace GUIApplication.Pages.PacketTracer
             _selectedPacket = PacketList.SelectedIndex;
             var packet = _packets[_selectedPacket];
 
-            //PacketDetails.Add(new PacketViewModel{Key = "Time received", Value = packet.Received.ToString()});
-
             foreach (var p in packet.GetFieldRepresentation())
             {
                 PacketDetails.Add(new PacketViewModel {Key = p.Key, Value = p.Value});

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using NetworkInspector.Models.Headers.Interfaces;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
 namespace NetworkInspector.Models.Headers.Application.DNS
 {
-    public class DNSHeader : IHeader, IDisplayable
+    public class DNSHeader : IHeader
     {
         private readonly ushort _usIdentification; // 16 bits
         private readonly ushort _usFlags; // 16 bits
@@ -70,7 +69,16 @@ namespace NetworkInspector.Models.Headers.Application.DNS
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            throw new System.NotImplementedException();
+            return new Dictionary<string, string>()
+            {
+                {"Application Header Protocol", ProtocolName.ToString()},
+                {"Identification", Identification},
+                {"Flags", string.Join(",", Flags)},
+                {"Total Questions", TotalQuestions},
+                {"Total Answer Resource Records", TotalAnswerResourceRecords},
+                {"Total Additional Resource Records", TotalAdditionalResourceRecords},
+                {"Total Authority Resource Records", TotalAuthorityResourceRecords}
+            };
         }
     }
 }
