@@ -83,7 +83,9 @@ namespace NetworkInspector.Models.Packets
 
             dic.AddRange(NetworkHeader.GetFieldRepresentation());
             dic.AddRange(TransportHeader.GetFieldRepresentation());
-            dic.AddRange(ApplicationHeader.GetFieldRepresentation());
+
+            // Application protocol might not be supported
+            if(ApplicationHeader != null) {dic.AddRange(ApplicationHeader.GetFieldRepresentation());}
 
             return dic;
         }

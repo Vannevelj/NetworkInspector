@@ -155,7 +155,7 @@ namespace UnitTests
 
             var parsedHeader = new HTTPHeader(header, length);
 
-            var charsets = parsedHeader.CharsetPreferences.ToArray();
+            var charsets = parsedHeader.AcceptCharsets.ToArray();
 
             Assert.AreEqual("ISO-8859-1", charsets[0].Charset);
             Assert.AreEqual(1, charsets[0].Weight);

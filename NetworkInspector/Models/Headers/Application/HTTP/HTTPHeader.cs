@@ -280,7 +280,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             get { return _ifNoneMatch; }
         }
 
-        public IEnumerable<CharsetPreference> CharsetPreferences
+        public IEnumerable<CharsetPreference> AcceptCharsets
         {
             get { return _acceptCharset; }
         }
@@ -294,7 +294,27 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         {
             return new Dictionary<string, string>()
             {
-                {}
+                {"Application Header Protocol", ProtocolName.ToString()},
+                {"HTTP Version", string.Format("HTTP{0}/{1}", HTTPVersion.Major, HTTPVersion.Minor)},
+                {"Request type", RequestType.ToString()},
+                {"Host", Host},
+                {"Page", Page},
+                {"Referer", Referer},
+                {"Origin", Origin},
+                {"User-Agent", UserAgent},
+                {"Content-Type", string.Join(",", ContentType)},
+                {"Content-Length", ContentLength.ToString()},
+                {"Range", Range},
+                {"Accept", string.Join(",", Accept)},
+                {"Accept-Charset", string.Join(",", AcceptCharsets)},
+                {"Accept-Encoding", string.Join(",", AcceptEncoding)},
+                {"Accept-Language", AcceptLanguage},
+                {"Cache-Control", CacheControl},
+                {"Connection", Connection},
+                {"If-Modified-Since", IfModifiedSince.ToString()},
+                {"If-None-Match", IfNoneMatch},
+                {"Cookies", string.Join(",", Cookies)},
+                {"Custom headers", string.Join(",", CustomHeaders)}
             };
         }
     }
