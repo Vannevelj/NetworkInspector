@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 

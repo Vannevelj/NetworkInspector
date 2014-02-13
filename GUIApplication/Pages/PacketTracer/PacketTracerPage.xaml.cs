@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using GUIApplication.vm;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Network.PacketTracing;
@@ -13,7 +10,7 @@ using NetworkInspector.Network.PacketTracing;
 namespace GUIApplication.Pages.PacketTracer
 {
     /// <summary>
-    /// Interaction logic for PacketTracerPage.xaml
+    ///     Interaction logic for PacketTracerPage.xaml
     /// </summary>
     public partial class PacketTracerPage : Page
     {
@@ -26,7 +23,7 @@ namespace GUIApplication.Pages.PacketTracer
         private int _selectedPacket;
 
         public List<PacketViewModel> PacketDetails { get; set; }
- 
+
 
         public PacketTracerPage()
         {
@@ -34,7 +31,7 @@ namespace GUIApplication.Pages.PacketTracer
             PacketDetails = new List<PacketViewModel>();
 
             // UI Event handlers
-            PacketList.SelectionChanged += PacketList_ItemSelected;    
+            PacketList.SelectionChanged += PacketList_ItemSelected;
         }
 
         private void PacketList_ItemSelected(object sender, SelectionChangedEventArgs e)
@@ -59,12 +56,17 @@ namespace GUIApplication.Pages.PacketTracer
 
             _tracerThread = new Thread(_tracer.Capture);
             _tracerThread.Start();
+
+            StopButton.IsEnabled = true;
+            StartButton.IsEnabled = false;
         }
 
         private void StopButton_OnClick(object sender, RoutedEventArgs e)
         {
             _tracer.Stop();
             _tracerThread.Abort();
+            StopButton.IsEnabled = false;
+            StartButton.IsEnabled = true;
         }
 
         private void PacketSent(object sender, PacketTracerEventArgs e)
@@ -79,7 +81,7 @@ namespace GUIApplication.Pages.PacketTracer
                     PacketList.Items.RemoveAt(0);
                 }
 
-                _packets[_packetsSent % MaxPackets] = e.Packet;
+                _packets[_packetsSent%MaxPackets] = e.Packet;
                 PacketList.Items.Add(item);
                 PacketList.ScrollIntoView(item);
             });
@@ -87,10 +89,7 @@ namespace GUIApplication.Pages.PacketTracer
 
         private void IncrementPacketsSent(object sender, PacketTracerEventArgs e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                AmountOfPacketsSentLabel.Content = ++_packetsSent;
-            });
+            Dispatcher.Invoke(() => { AmountOfPacketsSentLabel.Content = ++_packetsSent; });
         }
     }
 }

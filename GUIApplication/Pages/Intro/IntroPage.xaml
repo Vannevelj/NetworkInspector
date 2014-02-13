@@ -1,11 +1,11 @@
 ﻿<Page x:Class="GUIApplication.Pages.Intro.IntroPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="NetworkInspector">
+      Title="NetworkInspector">
 
     <Grid Margin="10, 0, 10, 10">
         <!--Layout-->
@@ -13,7 +13,7 @@
             <ColumnDefinition Width="130" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -25,18 +25,18 @@
         <Label Grid.Column="1" Style="{StaticResource LabelStyle}">
             Choose action
         </Label>
-        
+
         <Border Grid.Column="1" Grid.Row="1" Height="35" Padding="5" Background="#4E87D4">
             <Label VerticalAlignment="Center" Foreground="White">Applications</Label>
         </Border>
-        
+
         <ListBox Name="AppsListBox" Grid.Column="1" Grid.Row="2">
             <ListBoxItem>Bandwidth Monitor</ListBoxItem>
             <ListBoxItem>Packet Inspector</ListBoxItem>
         </ListBox>
-        
+
         <Button Grid.Column="1" Grid.Row="3" Click="StartButton_Click" Style="{StaticResource ButtonStyle}">
             Start
         </Button>
-    </Grid>   
+    </Grid>
 </Page>

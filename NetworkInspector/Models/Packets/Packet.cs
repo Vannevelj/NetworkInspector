@@ -76,16 +76,19 @@ namespace NetworkInspector.Models.Packets
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            var dic = new Dictionary<string, string>()
+            var dic = new Dictionary<string, string>
             {
-               {"Received", Received.ToString()},
+                {"Received", Received.ToString()},
             };
 
             dic.AddRange(NetworkHeader.GetFieldRepresentation());
             dic.AddRange(TransportHeader.GetFieldRepresentation());
 
             // Application protocol might not be supported
-            if(ApplicationHeader != null) {dic.AddRange(ApplicationHeader.GetFieldRepresentation());}
+            if (ApplicationHeader != null)
+            {
+                dic.AddRange(ApplicationHeader.GetFieldRepresentation());
+            }
 
             return dic;
         }

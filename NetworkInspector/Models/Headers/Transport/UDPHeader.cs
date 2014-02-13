@@ -67,13 +67,14 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public override string ToString()
         {
-            return string.Format("UDP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort, DestinationPort,
+            return string.Format("UDP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort,
+                DestinationPort,
                 MessageLength);
         }
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
                 {"Transport Header Protocol ", ProtocolName.ToString()},
                 {"Source port", SourcePort.ToString()},

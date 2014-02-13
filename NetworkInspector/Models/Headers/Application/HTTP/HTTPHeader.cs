@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Xml.Linq;
 using log4net;
 using NetworkInspector.Models.Headers.Application.HTTP.HeaderFields;
-using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 using Cookie = NetworkInspector.Models.Headers.Application.HTTP.HeaderFields.Cookie;
@@ -59,18 +58,18 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private string _connection;
         private string _userAgent;
         private string _referer;
-        private List<string> _acceptEncoding;
+        private readonly List<string> _acceptEncoding = new List<string>();
         private string _acceptLanguage;
         private int _contentLength;
-        private List<string> _contentType;
-        private List<Cookie> _cookieValues;
+        private readonly List<string> _contentType = new List<string>();
+        private readonly List<Cookie> _cookieValues = new List<Cookie>();
         private string _origin;
-        private List<AcceptPreference> _accept;
+        private readonly List<AcceptPreference> _accept = new List<AcceptPreference>();
         private DateTime _ifModifiedSince;
         private string _cacheControl;
         private string _ifNoneMatch;
         private readonly List<CustomField> _customHeaders = new List<CustomField>();
-        private List<CharsetPreference> _acceptCharset;
+        private readonly List<CharsetPreference> _acceptCharset = new List<CharsetPreference>();
         private string _range;
 #pragma warning restore 649
 
@@ -199,7 +198,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         public Version HTTPVersion
         {
-            get { return _version; }
+            get { return _version ?? new Version(0, 0); }
         }
 
         public string Host
@@ -292,7 +291,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
                 {"Application Header Protocol", ProtocolName.ToString()},
                 {"HTTP Version", string.Format("HTTP{0}/{1}", HTTPVersion.Major, HTTPVersion.Minor)},

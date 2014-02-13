@@ -21,22 +21,22 @@ namespace NetworkInspector.Network.PacketTracing
 
         public void Capture()
         {
-                _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
-                _log.Info("Socket created");
-                _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
-                _log.Info(string.Format("Socket bound to {0}", _mainSocket.LocalEndPoint));
+            _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
+            _log.Info("Socket created");
+            _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
+            _log.Info(string.Format("Socket bound to {0}", _mainSocket.LocalEndPoint));
 
-                _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
-                _running = true;
-                _log.Info("Packet tracing started");
-                _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
+            _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
+            _running = true;
+            _log.Info("Packet tracing started");
+            _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
 
-                //http://stackoverflow.com/questions/9440130/socket-iocontrol-ambiguous-documentation
+            //http://stackoverflow.com/questions/9440130/socket-iocontrol-ambiguous-documentation
 
-                var byTrue = new byte[] { 1, 0, 0, 0 };
-                var byOut = new byte[] { 1, 0, 0, 0 };
+            var byTrue = new byte[] {1, 0, 0, 0};
+            var byOut = new byte[] {1, 0, 0, 0};
 
-                _mainSocket.IOControl(IOControlCode.ReceiveAll, byTrue, byOut);
+            _mainSocket.IOControl(IOControlCode.ReceiveAll, byTrue, byOut);
         }
 
         public void Stop()
@@ -49,9 +49,10 @@ namespace NetworkInspector.Network.PacketTracing
             // http://vadmyst.blogspot.be/2008/04/proper-way-to-close-tcp-socket.html
             try
             {
-                int read = 0;
+                var read = 0;
                 while ((read = _mainSocket.Receive(_data)) > 0)
-                { }
+                {
+                }
             }
             catch
             {
@@ -81,7 +82,7 @@ namespace NetworkInspector.Network.PacketTracing
                 }
 
                 _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
-            }      
+            }
         }
 
         private void Parse(byte[] data, int size)

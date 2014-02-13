@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using NetworkInspector.Extensions;
-using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
@@ -168,21 +166,21 @@ namespace NetworkInspector.Models.Headers.Network
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
-               { "Network Layer Protocol", ProtocolName.ToString() },
-               { "Version", Version },
-               { "Source IP", SourceIP.ToString() },
-               { "Destination IP", DestinationIP.ToString() },
-               { "TTL", TTL },
-               { "Checksum", Checksum },
-               { "Differentiated Services", DifferentiatedServices },
-               { "Flags", Flags },
-               { "Fragmentation offset", FragmentationOffset },
-               { "IP header length", HeaderLength },
-               { "IP message length", MessageLength.ToString() },
-               { "Total length", TotalLength },
-               { "Identification", Identification },
+                {"Network Layer Protocol", ProtocolName.ToString()},
+                {"Version", Version},
+                {"Source IP", SourceIP.ToString()},
+                {"Destination IP", DestinationIP.ToString()},
+                {"TTL", TTL},
+                {"Checksum", Checksum},
+                {"Differentiated Services", DifferentiatedServices},
+                {"Flags", Flags},
+                {"Fragmentation offset", FragmentationOffset},
+                {"IP header length", HeaderLength},
+                {"IP message length", MessageLength.ToString()},
+                {"Total length", TotalLength},
+                {"Identification", Identification},
             };
         }
     }

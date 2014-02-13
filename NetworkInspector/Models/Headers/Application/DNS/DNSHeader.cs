@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 using NetworkInspector.Models.Packets;
 
@@ -69,7 +68,7 @@ namespace NetworkInspector.Models.Headers.Application.DNS
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
                 {"Application Header Protocol", ProtocolName.ToString()},
                 {"Identification", Identification},

@@ -19,11 +19,15 @@ namespace NetworkInspector.Extensions
         }
 
         /// <summary>
-        /// Combines two dictionaries together.
-        /// http://stackoverflow.com/questions/3982448/adding-a-dictionary-to-another
+        ///     Combines two dictionaries together.
+        ///     http://stackoverflow.com/questions/3982448/adding-a-dictionary-to-another
         /// </summary>
-        /// <typeparam name="T"><code>Dictionary</code></typeparam>
-        /// <typeparam name="S"><code>Dictionary</code></typeparam>
+        /// <typeparam name="T">
+        ///     <code>Dictionary</code>
+        /// </typeparam>
+        /// <typeparam name="S">
+        ///     <code>Dictionary</code>
+        /// </typeparam>
         /// <param name="source">Source dictionary</param>
         /// <param name="collection">Dictionary to add</param>
         public static void AddRange<T, S>(this Dictionary<T, S> source, Dictionary<T, S> collection)
@@ -38,10 +42,6 @@ namespace NetworkInspector.Extensions
                 if (!source.ContainsKey(item.Key))
                 {
                     source.Add(item.Key, item.Value);
-                }
-                else
-                {
-                    // handle duplicate key issue here
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace NetworkInspector.Models.Headers.Transport
 
         private readonly uint _uiSequenceNumber = 555; // 32 bits
 
-        private readonly uint _uiAckNumber = 555; // 32 bits
+        private readonly long _uiAckNumber = 555; // 32 bits
 
         private readonly ushort _usDataOffsetAndFlags = 555; // 16 bits
 
@@ -71,9 +71,9 @@ namespace NetworkInspector.Models.Headers.Transport
             get { return Convert.ToInt32(_uiSequenceNumber); }
         }
 
-        public int AcknowledgementNumber
+        public long AcknowledgementNumber
         {
-            get { return (_usDataOffsetAndFlags & 0x10) != 0 ? Convert.ToInt32(_uiAckNumber) : 0; }
+            get { return (_usDataOffsetAndFlags & 0x10) != 0 ? Convert.ToInt64(_uiAckNumber) : 0; }
         }
 
         public int HeaderLength
@@ -154,13 +154,14 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public override string ToString()
         {
-            return string.Format("TCP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort, DestinationPort,
+            return string.Format("TCP - Source: {0} - Destination: {1} - MessageLength: {2}", SourcePort,
+                DestinationPort,
                 _usMessageLength);
         }
 
         public Dictionary<string, string> GetFieldRepresentation()
         {
-            return new Dictionary<string, string>()
+            return new Dictionary<string, string>
             {
                 {"Transport Header Protocol", ProtocolName.ToString()},
                 {"Source port", SourcePort.ToString()},

@@ -13,7 +13,10 @@ namespace UnitTests
         private static string _page = "/tutorials/other/top-20-mysql-best-practices/";
         private static string _httpVersion = "HTTP/1.1";
         private static string _host = "net.tutsplus.com";
-        private static string _userAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)";
+
+        private static string _userAgent =
+            "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)";
+
         private static string _accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         private static string _acceptLanguage = "en-us,en;q=0.5";
         private static string _acceptEncoding = "gzip,deflate";
