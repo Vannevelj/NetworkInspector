@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using GUIApplication.Pages.PacketTracer;
+using log4net;
 
 namespace GUIApplication.Pages.Intro
 {
     /// <summary>
-    /// Interaction logic for IntroPage.xaml
+    ///     Interaction logic for IntroPage.xaml
     /// </summary>
     public partial class IntroPage : Page
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public IntroPage()
         {
+            _log.Info(string.Format("Session started at {0}", DateTime.Now));
             InitializeComponent();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
-        {     
+        {
             var action = AppsListBox.SelectedIndex;
 
             switch (action)
@@ -33,7 +37,7 @@ namespace GUIApplication.Pages.Intro
                 case -1:
                     break;
 
-                default: 
+                default:
                     throw new ArgumentException();
             }
         }

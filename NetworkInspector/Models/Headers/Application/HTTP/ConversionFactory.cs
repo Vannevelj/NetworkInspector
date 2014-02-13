@@ -74,7 +74,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                     .Select(pairs => new Cookie
                     {
                         Key = pairs[0].Trim(),
-                        Value = pairs[1].Trim()
+                        Value = pairs.Length > 1 ? pairs[1].Trim() : ""
                     }).ToList();
         }
 

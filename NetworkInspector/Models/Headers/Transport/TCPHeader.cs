@@ -15,7 +15,7 @@ namespace NetworkInspector.Models.Headers.Transport
 
         private readonly uint _uiSequenceNumber = 555; // 32 bits
 
-        private readonly long _uiAckNumber = 555; // 32 bits
+        private readonly long _ackNumber = 555; // 32 bits
 
         private readonly ushort _usDataOffsetAndFlags = 555; // 16 bits
 
@@ -40,7 +40,7 @@ namespace NetworkInspector.Models.Headers.Transport
                     _usSourcePort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
                     _usDestinationPort = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
                     _uiSequenceNumber = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt32());
-                    _uiAckNumber = (uint) IPAddress.NetworkToHostOrder(reader.ReadInt32());
+                    _ackNumber = (uint) IPAddress.NetworkToHostOrder(reader.ReadInt32());
                     _usDataOffsetAndFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
                     _usWindow = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
                     _sChecksum = IPAddress.NetworkToHostOrder(reader.ReadInt16());
@@ -73,7 +73,7 @@ namespace NetworkInspector.Models.Headers.Transport
 
         public long AcknowledgementNumber
         {
-            get { return (_usDataOffsetAndFlags & 0x10) != 0 ? Convert.ToInt64(_uiAckNumber) : 0; }
+            get { return (_usDataOffsetAndFlags & 0x10) != 0 ? Convert.ToInt64(_ackNumber) : 0; }
         }
 
         public int HeaderLength
