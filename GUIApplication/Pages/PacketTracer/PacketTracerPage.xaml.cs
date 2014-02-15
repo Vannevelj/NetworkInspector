@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using GUIApplication.vm;
+using log4net;
+using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Network.PacketTracing;
 
@@ -14,6 +17,8 @@ namespace GUIApplication.Pages.PacketTracer
     /// </summary>
     public partial class PacketTracerPage : Page
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private NetworkInspector.Network.PacketTracing.PacketTracer _tracer;
         private Thread _tracerThread;
         private int _packetsSent;
@@ -52,10 +57,10 @@ namespace GUIApplication.Pages.PacketTracer
         {
             _tracer = new NetworkInspector.Network.PacketTracing.PacketTracer();
             _tracer.OnPacketReceived += PacketSent;
-            _tracer.OnPacketReceived += IncrementPacketsSent;
 
+            _log.Info("Packet tracing activated in interface");
             _tracerThread = new Thread(_tracer.Capture);
-            _tracerThread.Start();
+            _tracerThread.Start();         
 
             StopButton.IsEnabled = true;
             StartButton.IsEnabled = false;
@@ -63,8 +68,10 @@ namespace GUIApplication.Pages.PacketTracer
 
         private void StopButton_OnClick(object sender, RoutedEventArgs e)
         {
+            _log.Info("Packet tracing deactivated in interface");
             _tracer.Stop();
             _tracerThread.Abort();
+
             StopButton.IsEnabled = false;
             StartButton.IsEnabled = true;
         }
@@ -73,7 +80,7 @@ namespace GUIApplication.Pages.PacketTracer
         {
             Dispatcher.Invoke(() =>
             {
-                var item = string.Format("{0}: {1}", e.Packet.PacketType, e.Packet.NetworkHeader.DestinationIP);
+                var item = string.Format("{0} - {1}: {2}", e.Packet.NetworkHeader.Identification, e.Packet.ApplicationHeader == null ? e.Packet.PacketType : e.Packet.ApplicationHeader.ProtocolName, e.Packet.NetworkHeader.DestinationIP);
 
                 if (_packetsSent >= MaxPackets)
                 {
@@ -84,12 +91,8 @@ namespace GUIApplication.Pages.PacketTracer
                 _packets[_packetsSent%MaxPackets] = e.Packet;
                 PacketList.Items.Add(item);
                 PacketList.ScrollIntoView(item);
+                AmountOfPacketsSentLabel.Content = _packetsSent++;
             });
-        }
-
-        private void IncrementPacketsSent(object sender, PacketTracerEventArgs e)
-        {
-            Dispatcher.Invoke(() => { AmountOfPacketsSentLabel.Content = ++_packetsSent; });
         }
     }
 }

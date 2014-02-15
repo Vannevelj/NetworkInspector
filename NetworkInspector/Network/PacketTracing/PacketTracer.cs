@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using log4net;
+using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
@@ -109,6 +110,15 @@ namespace NetworkInspector.Network.PacketTracing
 
         private void NotifyObservers(Packet p)
         {
+            if (p.ApplicationHeader is HTTPHeader)
+            {
+                var http = p.ApplicationHeader as HTTPHeader;
+                if (string.IsNullOrEmpty(http.Host))
+                {
+                    return;
+                }
+            }
+
             var handler = OnPacketReceived;
 
             if (handler != null)

@@ -14,9 +14,12 @@ namespace NetworkInspector.Models.Headers.Application.DNS
         private readonly ushort _usTotalAnswerResourceRecords; // 16 bits
         private readonly ushort _usTotalAuthorityResourceRecords; // 16 bits
         private readonly ushort _usTotalAdditionalResourceRecords; // 16 bits
+        private readonly string _data;
 
         public DNSHeader(byte[] buffer, int size)
         {
+            _data = System.Text.Encoding.Default.GetString(buffer);
+
             using (var stream = new MemoryStream(buffer, 0, size))
             {
                 using (var reader = new BinaryReader(stream))
@@ -76,7 +79,8 @@ namespace NetworkInspector.Models.Headers.Application.DNS
                 {"Total Questions", TotalQuestions},
                 {"Total Answer Resource Records", TotalAnswerResourceRecords},
                 {"Total Additional Resource Records", TotalAdditionalResourceRecords},
-                {"Total Authority Resource Records", TotalAuthorityResourceRecords}
+                {"Total Authority Resource Records", TotalAuthorityResourceRecords},
+                {"Raw data", _data}
             };
         }
     }

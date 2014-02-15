@@ -71,10 +71,12 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private readonly List<CustomField> _customHeaders = new List<CustomField>();
         private readonly List<CharsetPreference> _acceptCharset = new List<CharsetPreference>();
         private string _range;
+        private string _data;
 #pragma warning restore 649
 
         public HTTPHeader(byte[] data, int length)
         {
+            _data = System.Text.Encoding.Default.GetString(data);
             using (var stream = new MemoryStream(data, 0, length))
             {
                 using (var reader = new StreamReader(stream))
@@ -312,8 +314,9 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 {"Connection", Connection},
                 {"If-Modified-Since", IfModifiedSince.ToString()},
                 {"If-None-Match", IfNoneMatch},
-                {"Cookies", string.Join(",", Cookies)},
-                {"Custom headers", string.Join(",", CustomHeaders)}
+                {"Cookies", string.Join("\n", Cookies)},
+                {"Custom headers", string.Join("\n", CustomHeaders)},
+                {"Raw data", _data}
             };
         }
     }
