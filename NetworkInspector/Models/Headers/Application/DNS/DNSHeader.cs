@@ -8,12 +8,12 @@ namespace NetworkInspector.Models.Headers.Application.DNS
 {
     public class DNSHeader : IHeader
     {
-        private readonly ushort _usIdentification; // 16 bits
-        private readonly ushort _usFlags; // 16 bits
-        private readonly ushort _usTotalQuestions; // 16 bits
-        private readonly ushort _usTotalAnswerResourceRecords; // 16 bits
-        private readonly ushort _usTotalAuthorityResourceRecords; // 16 bits
-        private readonly ushort _usTotalAdditionalResourceRecords; // 16 bits
+        private readonly int _identification; // 16 bits
+        private readonly int _flags; // 16 bits
+        private readonly int _questionCount; // 16 bits
+        private readonly int _answerRecordCount; // 16 bits
+        private readonly int _authorityRecordCount; // 16 bits
+        private readonly int _additionalRecordCount; // 16 bits
         private readonly string _data;
 
         public DNSHeader(byte[] buffer, int size)
@@ -24,44 +24,44 @@ namespace NetworkInspector.Models.Headers.Application.DNS
             {
                 using (var reader = new BinaryReader(stream))
                 {
-                    _usIdentification = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-                    _usFlags = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-                    _usTotalQuestions = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-                    _usTotalAnswerResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-                    _usTotalAuthorityResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
-                    _usTotalAdditionalResourceRecords = (ushort) IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _identification = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _flags = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _questionCount = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _answerRecordCount = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _authorityRecordCount = IPAddress.NetworkToHostOrder(reader.ReadInt16());
+                    _additionalRecordCount = IPAddress.NetworkToHostOrder(reader.ReadInt16());
                 }
             }
         }
 
         public string Identification
         {
-            get { return string.Format("0x{0:x2}", _usIdentification); }
+            get { return string.Format("0x{0:x2}", _identification); }
         }
 
         public string Flags
         {
-            get { return string.Format("0x{0:x2}", _usFlags); }
+            get { return string.Format("0x{0:x2}", _flags); }
         }
 
-        public string TotalQuestions
+        public int QuestionCount
         {
-            get { return _usTotalQuestions.ToString(); }
+            get { return _questionCount; }
         }
 
-        public string TotalAnswerResourceRecords
+        public int AnswerRecordCount
         {
-            get { return _usTotalAnswerResourceRecords.ToString(); }
+            get { return _answerRecordCount; }
         }
 
-        public string TotalAuthorityResourceRecords
+        public int AuthorityRecordCount
         {
-            get { return _usTotalAuthorityResourceRecords.ToString(); }
+            get { return _authorityRecordCount; }
         }
 
-        public string TotalAdditionalResourceRecords
+        public int AdditionalRecordCount
         {
-            get { return _usTotalAdditionalResourceRecords.ToString(); }
+            get { return _additionalRecordCount; }
         }
 
         public Protocol ProtocolName
@@ -76,10 +76,10 @@ namespace NetworkInspector.Models.Headers.Application.DNS
                 {"Application Header Protocol", ProtocolName.ToString()},
                 {"Identification", Identification},
                 {"Flags", string.Join(",", Flags)},
-                {"Total Questions", TotalQuestions},
-                {"Total Answer Resource Records", TotalAnswerResourceRecords},
-                {"Total Additional Resource Records", TotalAdditionalResourceRecords},
-                {"Total Authority Resource Records", TotalAuthorityResourceRecords},
+                {"Total Questions", QuestionCount.ToString()},
+                {"Total Answer Resource Records", AnswerRecordCount.ToString()},
+                {"Total Additional Resource Records", AdditionalRecordCount.ToString()},
+                {"Total Authority Resource Records", AuthorityRecordCount.ToString()},
                 {"Raw data", _data}
             };
         }

@@ -91,7 +91,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         {
             data = data.Replace("\r", "");
             var fields = data.Trim().Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
-            if (fields.Length <= 0) return;
+            if (fields.Length <= 1) return; // Host is field[1]; I want at least a host entry.
 
             ParseTypePageVersion(fields[0]);
 

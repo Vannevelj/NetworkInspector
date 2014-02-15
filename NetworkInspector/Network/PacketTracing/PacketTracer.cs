@@ -50,8 +50,7 @@ namespace NetworkInspector.Network.PacketTracing
             // http://vadmyst.blogspot.be/2008/04/proper-way-to-close-tcp-socket.html
             try
             {
-                var read = 0;
-                while ((read = _mainSocket.Receive(_data)) > 0)
+                while ((_mainSocket.Receive(_data)) > 0)
                 {
                 }
             }
@@ -61,7 +60,6 @@ namespace NetworkInspector.Network.PacketTracing
             }
 
             _mainSocket.Close();
-            _mainSocket.Dispose();
 
             _log.Info("Packet tracing stopped");
         }
@@ -81,8 +79,10 @@ namespace NetworkInspector.Network.PacketTracing
                 {
                     Parse(_data, received);
                 }
-
-                _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
+                if (_running)
+                {
+                    _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
+                }                
             }
         }
 
@@ -110,6 +110,7 @@ namespace NetworkInspector.Network.PacketTracing
 
         private void NotifyObservers(Packet p)
         {
+            // Don't display empty HTTP requests
             if (p.ApplicationHeader is HTTPHeader)
             {
                 var http = p.ApplicationHeader as HTTPHeader;
