@@ -27,7 +27,6 @@ namespace NetworkInspector.Network.PacketTracing
             _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
             _log.Info(string.Format("Socket bound to {0}", _mainSocket.LocalEndPoint));
 
-            _mainSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             _running = true;
             _log.Info("Packet tracing started");
             _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
