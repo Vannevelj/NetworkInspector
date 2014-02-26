@@ -13,6 +13,7 @@ namespace GUIApplication.Pages.Intro
     public partial class IntroPage : Page
     {
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public IntroPage()
         {
             _log.Info(string.Format("Session started at {0}", DateTime.Now));

@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using GUIApplication.vm;
 using log4net;
-using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Network.PacketTracing;
 
@@ -60,7 +59,7 @@ namespace GUIApplication.Pages.PacketTracer
 
             _log.Info("Packet tracing activated in interface");
             _tracerThread = new Thread(_tracer.Capture);
-            _tracerThread.Start();         
+            _tracerThread.Start();
 
             StopButton.IsEnabled = true;
             StartButton.IsEnabled = false;
@@ -80,7 +79,9 @@ namespace GUIApplication.Pages.PacketTracer
         {
             Dispatcher.Invoke(() =>
             {
-                var item = string.Format("{0} - {1}: {2}", e.Packet.NetworkHeader.Identification, e.Packet.ApplicationHeader == null ? e.Packet.PacketType : e.Packet.ApplicationHeader.ProtocolName, e.Packet.NetworkHeader.DestinationIP);
+                var item = string.Format("{0} - {1}: {2}", e.Packet.NetworkHeader.Identification,
+                    e.Packet.ApplicationHeader == null ? e.Packet.PacketType : e.Packet.ApplicationHeader.ProtocolName,
+                    e.Packet.NetworkHeader.DestinationIP);
 
                 if (_packetsSent >= MaxPackets)
                 {

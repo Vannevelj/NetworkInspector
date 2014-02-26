@@ -18,3 +18,4 @@ C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.xml
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.csprojResolveAssemblyReference.cache
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.dll
 C:\Users\jeroen\Github\NetworkInspector\NetworkInspector\obj\Release\NetworkInspector.pdb
+D:\Github\NetworkInspector\NetworkInspector\bin\Release\log4net.config

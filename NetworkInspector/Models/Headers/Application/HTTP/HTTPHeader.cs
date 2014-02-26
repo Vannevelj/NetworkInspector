@@ -71,7 +71,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private readonly List<CustomField> _customHeaders = new List<CustomField>();
         private readonly List<CharsetPreference> _acceptCharset = new List<CharsetPreference>();
         private string _range;
-        private string _data;
+        private readonly string _data;
 #pragma warning restore 649
 
         public HTTPHeader(byte[] data, int length)

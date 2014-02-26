@@ -14,6 +14,25 @@
             <param name="this">String to replace the brackets on</param>
             <returns></returns>
         </member>
+        <member name="M:NetworkInspector.Extensions.Helpers.AddRange``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+                Combines two dictionaries together.
+                http://stackoverflow.com/questions/3982448/adding-a-dictionary-to-another
+            </summary>
+            <typeparam name="T">
+                <code>Dictionary</code>
+            </typeparam>
+            <typeparam name="S">
+                <code>Dictionary</code>
+            </typeparam>
+            <param name="source">Source dictionary</param>
+            <param name="collection">Dictionary to add</param>
+        </member>
+        <member name="P:NetworkInspector.Models.Headers.Application.HTTP.HTTPHeader.IfModifiedSince">
+            <summary>
+                Returns <code>DateTime.MinValue</code> if no date could be parsed. Dates are returned in UTC time.
+            </summary>
+        </member>
         <member name="M:NetworkInspector.Network.Utilities.GetLocalIP">
             <summary>
                 Retrieves the IP of the current device in the local network

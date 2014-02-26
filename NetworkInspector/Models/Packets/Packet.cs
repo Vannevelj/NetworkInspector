@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using log4net;
 using NetworkInspector.Extensions;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
@@ -22,6 +24,8 @@ namespace NetworkInspector.Models.Packets
 
     public abstract class Packet : IDisplayable
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public abstract Protocol PacketType { get; } // TODO: what protocol are we defining here?
 
         public IHeader ApplicationHeader { get; set; }
@@ -46,6 +50,15 @@ namespace NetworkInspector.Models.Packets
                     else if (tcp.SourcePort == 80 || tcp.DestinationPort == 80)
                     {
                         ApplicationHeader = new HTTPHeader(tcp.Data, tcp.MessageLength);
+                        _log.Fatal(NetworkHeader.SourceIP);
+                    }
+
+                    else
+                    {
+                        _log.Warn(
+                            string.Format(
+                                "Could not detect packet. Source port: {0}\tDestination port: {1} Source IP: {2}",
+                                tcp.SourcePort, tcp.DestinationPort, NetworkHeader.SourceIP));
                     }
                 }
                     break;
@@ -56,6 +69,14 @@ namespace NetworkInspector.Models.Packets
                     if (udp.SourcePort == 53 || udp.DestinationPort == 53)
                     {
                         ApplicationHeader = new DNSHeader(udp.Data, udp.MessageLength - 8);
+                    }
+
+                    else
+                    {
+                        _log.Warn(
+                            string.Format(
+                                "Could not detect packet. Source port: {0}\tDestination port: {1} Source IP: {2}",
+                                udp.SourcePort, udp.DestinationPort, NetworkHeader.SourceIP));
                     }
                 }
                     break;

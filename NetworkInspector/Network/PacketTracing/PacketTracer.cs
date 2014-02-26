@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using log4net;
+using NetFwTypeLib;
 using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
@@ -12,6 +13,9 @@ namespace NetworkInspector.Network.PacketTracing
 {
     public class PacketTracer
     {
+        private static readonly Type policyType = Type.GetTypeFromProgID("HNetCfg.FwPolicy2");
+        private static readonly INetFwPolicy2 firewall = (INetFwPolicy2) Activator.CreateInstance(policyType);
+
         private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public event EventHandler<PacketTracerEventArgs> OnPacketReceived;
 
@@ -20,8 +24,31 @@ namespace NetworkInspector.Network.PacketTracing
 
         private Socket _mainSocket;
 
+        // http://stackoverflow.com/questions/14725934/c-sharp-enable-disable-windows-7-windows-7-embedded-firewall
+        // http://www.codeproject.com/script/Articles/ViewDownloads.aspx?aid=19003
+        private void DisableFirewall()
+        {
+            var firewallEnabled = firewall.get_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE);
+            if (firewallEnabled)
+            {
+                firewall.set_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE, false);
+                _log.Info("Firewall disabled");
+            }
+        }
+
+        private void EnableFirewall()
+        {
+            var firewallEnabled = firewall.get_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE);
+            if (!firewallEnabled)
+            {
+                firewall.set_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE, true);
+                _log.Info("Firewall enabled");
+            }
+        }
+
         public void Capture()
         {
+            DisableFirewall();
             _mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
             _log.Info("Socket created");
             _mainSocket.Bind(new IPEndPoint(Utilities.GetLocalIP(), 0));
@@ -29,14 +56,15 @@ namespace NetworkInspector.Network.PacketTracing
 
             _running = true;
             _log.Info("Packet tracing started");
-            _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
 
             //http://stackoverflow.com/questions/9440130/socket-iocontrol-ambiguous-documentation
-
             var byTrue = new byte[] {1, 0, 0, 0};
             var byOut = new byte[] {1, 0, 0, 0};
 
             _mainSocket.IOControl(IOControlCode.ReceiveAll, byTrue, byOut);
+
+            _mainSocket.EnableBroadcast = true;
+            _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
         }
 
         public void Stop()
@@ -59,6 +87,7 @@ namespace NetworkInspector.Network.PacketTracing
             }
 
             _mainSocket.Close();
+            EnableFirewall();
 
             _log.Info("Packet tracing stopped");
         }
@@ -81,7 +110,7 @@ namespace NetworkInspector.Network.PacketTracing
                 if (_running)
                 {
                     _mainSocket.BeginReceive(_data, 0, _data.Length, SocketFlags.None, OnReceive, null);
-                }                
+                }
             }
         }
 
