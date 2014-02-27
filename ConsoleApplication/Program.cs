@@ -75,11 +75,11 @@ namespace ConsoleApplication
         {
             if (e.Packet.PacketType == Protocol.UDP)
             {
-                IncomingPacket(e.Packet as UDPPacket);
+                IncomingUDPPacket(e.Packet);
             }
             else if (e.Packet.PacketType == Protocol.TCP)
             {
-                IncomingPacket(e.Packet as TCPPacket);
+                IncomingTCPPacket(e.Packet);
             }
         }
 
@@ -114,7 +114,7 @@ namespace ConsoleApplication
             Console.ReadKey();
         }
 
-        public void IncomingPacket(TCPPacket tcp)
+        public void IncomingTCPPacket(Packet tcp)
         {
             Console.WriteLine("Time received:\t\t{0}", tcp.Received.ToLongTimeString());
             Console.WriteLine("Packet type:\t\t{0}", tcp.TransportHeader.ProtocolName);
@@ -132,7 +132,7 @@ namespace ConsoleApplication
             Console.WriteLine("\n\n");
         }
 
-        public void IncomingPacket(UDPPacket udp)
+        public void IncomingUDPPacket(Packet udp)
         {
             Console.WriteLine("Time received:\t\t{0}", udp.Received.ToLongTimeString());
             Console.WriteLine("Packet type:\t\t{0}", udp.TransportHeader.ProtocolName);

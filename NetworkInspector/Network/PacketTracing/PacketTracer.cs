@@ -8,6 +8,7 @@ using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
 using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
+using NetworkInspector.Models.Parser;
 
 namespace NetworkInspector.Network.PacketTracing
 {
@@ -115,26 +116,15 @@ namespace NetworkInspector.Network.PacketTracing
             }
         }
 
-        private void Parse(byte[] data, int size)
+        private void Parse(byte[] data, int length)
         {
-            var packet = new IPHeader(data, size);
+            var packetBuilder = new PacketBuilder();
+            var packet = packetBuilder.Parse(data, length);
 
-            switch (packet.UnderlyingProtocol)
+            if (packet != null)
             {
-                case Protocol.UDP:
-                {
-                    var udp = new UDPHeader(packet.Data, packet.MessageLength);
-                    NotifyObservers(new UDPPacket(packet, udp));
-                }
-                    break;
-
-                case Protocol.TCP:
-                {
-                    var tcp = new TCPHeader(packet.Data, packet.MessageLength);
-                    NotifyObservers(new TCPPacket(packet, tcp));
-                }
-                    break;
-            }
+                NotifyObservers(packet);
+            }   
         }
 
         private void NotifyObservers(Packet p)

@@ -88,9 +88,7 @@
     <Compile Include="Models\Headers\Application\DNS\DNSHeader.cs" />
     <Compile Include="Models\Headers\Network\IPHeader.cs" />
     <Compile Include="Models\Headers\Transport\TCPHeader.cs" />
-    <Compile Include="Models\Packets\TCPPacket.cs" />
     <Compile Include="Models\Headers\Transport\UDPHeader.cs" />
-    <Compile Include="Models\Packets\UDPPacket.cs" />
     <Compile Include="Models\NetworkStatistics.cs" />
     <Compile Include="Network\PacketTracing\PacketTracer.cs" />
     <Compile Include="Network\PacketTracing\PacketTracerEventArgs.cs" />

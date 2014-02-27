@@ -22,11 +22,9 @@ namespace NetworkInspector.Models.Packets
         UNKNOWN
     }
 
-    public abstract class Packet : IDisplayable
+    public class Packet : IDisplayable
     {
-        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        public abstract Protocol PacketType { get; } // TODO: what protocol are we defining here?
+        public Protocol PacketType { get; set; } 
 
         public IHeader ApplicationHeader { get; set; }
 
@@ -35,55 +33,6 @@ namespace NetworkInspector.Models.Packets
         public IPHeader NetworkHeader { get; set; }
 
         public DateTime Received { get; set; }
-
-        protected void DetectApplicationHeader(IHeader header)
-        {
-            switch (header.ProtocolName)
-            {
-                case Protocol.TCP:
-                {
-                    var tcp = (TCPHeader) header;
-                    if (tcp.SourcePort == 53 || tcp.DestinationPort == 53)
-                    {
-                        ApplicationHeader = new DNSHeader(tcp.Data, tcp.MessageLength);
-                    }
-                    else if (tcp.SourcePort == 80 || tcp.DestinationPort == 80)
-                    {
-                        ApplicationHeader = new HTTPHeader(tcp.Data, tcp.MessageLength);
-                    }
-
-                    else
-                    {
-                        _log.Warn(
-                            string.Format(
-                                "Could not detect packet type. Source port: {0}\tDestination port: {1} Source IP: {2}",
-                                tcp.SourcePort, tcp.DestinationPort, NetworkHeader.SourceIP));
-                    }
-                }
-                    break;
-
-                case Protocol.UDP:
-                {
-                    var udp = (UDPHeader) header;
-                    if (udp.SourcePort == 53 || udp.DestinationPort == 53)
-                    {
-                        ApplicationHeader = new DNSHeader(udp.Data, udp.MessageLength - 8);
-                    }
-
-                    else
-                    {
-                        _log.Warn(
-                            string.Format(
-                                "Could not detect packet type. Source port: {0}\tDestination port: {1} Source IP: {2}",
-                                udp.SourcePort, udp.DestinationPort, NetworkHeader.SourceIP));
-                    }
-                }
-                    break;
-
-                default:
-                    throw new ArgumentException();
-            }
-        }
 
         public override string ToString()
         {

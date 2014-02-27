@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using log4net;
 using NetworkInspector.Models.Headers.Application.DNS;
 using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
@@ -8,54 +10,52 @@ using NetworkInspector.Models.Packets;
 
 namespace NetworkInspector.Models.Parser
 {
-    internal class PacketBuilder
+    public class PacketBuilder
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private IHeader _networkLayer;
         private IHeader _transportLayer;
         private IHeader _applicationLayer;
 
-        internal Packet Parse(byte[] data, int length)
+        public Packet Parse(byte[] data, int length)
         {
             // Parse network layer
             var networkResult = ParseNetworkHeader(data, length);
             _networkLayer = networkResult.Header;
 
             // Parse transport layer
-            var transportResult = ParseTransportHeader(networkResult.Data, networkResult.Length, networkResult.UnderlyingProtocol);
+            var transportResult = ParseTransportHeader(networkResult.Data, networkResult.Length,
+                networkResult.UnderlyingProtocol);
+
+            // Do not continue when we don't know the packet type
+            if (transportResult == null)
+            {
+                return null;
+            }
             _transportLayer = transportResult.Header;
 
             // Parse application layer
-            var applicationResult = ParseApplicationHeader(transportResult.Data, transportResult.Length, transportResult.UnderlyingProtocol);
-            _applicationLayer = applicationResult.Header;
-
-            if (_transportLayer.ProtocolName == Protocol.TCP)
+            var applicationResult = ParseApplicationHeader(transportResult.Data, transportResult.Length,
+                transportResult.UnderlyingProtocol);
+            if (applicationResult != null)
             {
-                return new TCPPacket
-                {
-                    NetworkHeader = _networkLayer as IPHeader,
-                    TransportHeader = _transportLayer,
-                    ApplicationHeader = _applicationLayer,
-                    Received = DateTime.Now
-                };
+                _applicationLayer = applicationResult.Header;
             }
-
-            if (_transportLayer.ProtocolName == Protocol.UDP)
+            
+            return new Packet
             {
-                return new UDPPacket
-                {
-                    NetworkHeader = _networkLayer as IPHeader,
-                    TransportHeader = _transportLayer,
-                    ApplicationHeader = _applicationLayer,
-                    Received = DateTime.Now
-                };
-            }
-
-            return null;
+                PacketType = _transportLayer.ProtocolName,
+                NetworkHeader = _networkLayer as IPHeader,
+                TransportHeader = _transportLayer,
+                ApplicationHeader = _applicationLayer,
+                Received = DateTime.Now
+            };
         }
 
         private ParseResult ParseNetworkHeader(byte[] data, int length)
         {
-            var header  = new IPHeader(data, length);
+            var header = new IPHeader(data, length);
             return new ParseResult
             {
                 Header = header,
@@ -70,7 +70,7 @@ namespace NetworkInspector.Models.Parser
             if (protocol == Protocol.TCP)
             {
                 var header = new TCPHeader(data, length);
-                Protocol prot = Protocol.UNKNOWN;
+                var prot = Protocol.UNKNOWN;
 
                 if (header.SourcePort == 53 || header.DestinationPort == 53)
                 {
@@ -80,6 +80,14 @@ namespace NetworkInspector.Models.Parser
                 if (header.SourcePort == 80 || header.DestinationPort == 80)
                 {
                     prot = Protocol.HTTP;
+                }
+
+                else
+                {
+                    _log.Warn(
+                            string.Format(
+                                "Could not detect application header. Source port: {0}\tDestination port: {1}",
+                                header.SourcePort, header.DestinationPort));
                 }
 
                 return new ParseResult
@@ -94,7 +102,7 @@ namespace NetworkInspector.Models.Parser
             if (protocol == Protocol.UDP)
             {
                 var header = new UDPHeader(data, length);
-                Protocol prot = Protocol.UNKNOWN;
+                var prot = Protocol.UNKNOWN;
 
                 if (header.SourcePort == 53 || header.DestinationPort == 53)
                 {
@@ -104,6 +112,14 @@ namespace NetworkInspector.Models.Parser
                 if (header.SourcePort == 80 || header.DestinationPort == 80)
                 {
                     prot = Protocol.HTTP;
+                }
+
+                else
+                {
+                    _log.Warn(
+                            string.Format(
+                                "Could not detect application header. Source port: {0}\tDestination port: {1}",
+                                header.SourcePort, header.DestinationPort));
                 }
 
                 return new ParseResult
@@ -120,6 +136,8 @@ namespace NetworkInspector.Models.Parser
 
         private ParseResult ParseApplicationHeader(byte[] data, int length, Protocol protocol)
         {
+            if (protocol == Protocol.UNKNOWN) {  return null; }
+
             if (protocol == Protocol.DNS)
             {
                 IHeader header = null;
@@ -153,7 +171,5 @@ namespace NetworkInspector.Models.Parser
 
             return null;
         }
-
-        
     }
 }

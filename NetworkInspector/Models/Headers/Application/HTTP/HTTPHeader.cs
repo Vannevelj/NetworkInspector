@@ -76,7 +76,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         // Mainly response fields
         private int _responseCode;
         private string _status;
-#pragma warning restor e 649
+#pragma warning restore 649
 
         public HTTPHeader(byte[] data, int length)
         {
