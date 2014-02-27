@@ -31,8 +31,9 @@ namespace NetworkInspector.Network.PacketTracing
             var firewallEnabled = firewall.get_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE);
             if (firewallEnabled)
             {
-                firewall.set_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE, false);
+                //firewall.set_FirewallEnabled(NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE, false);
                 _log.Info("Firewall disabled");
+                firewall.FirewallEnabled[NET_FW_PROFILE_TYPE2_.NET_FW_PROFILE2_PRIVATE] = false;
             }
         }
 

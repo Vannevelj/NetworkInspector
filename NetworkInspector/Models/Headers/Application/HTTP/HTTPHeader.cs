@@ -72,6 +72,10 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private readonly List<CharsetPreference> _acceptCharset = new List<CharsetPreference>();
         private string _range;
         private readonly string _data;
+
+        // Mainly response fields
+        private int _responseCode;
+        private string _status;
 #pragma warning restore 649
 
         public HTTPHeader(byte[] data, int length)
@@ -93,7 +97,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             var fields = data.Trim().Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
             if (fields.Length <= 1) return; // Host is field[1]; I want at least a host entry.
 
-            ParseTypePageVersion(fields[0]);
+            DetermineType(fields[0]);
 
             for (var i = 1; i < fields.Length; i++)
             {
@@ -101,19 +105,30 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
             }
         }
 
-        private void ParseTypePageVersion(string s)
+        // Checks whether it's a request or response
+        private void DetermineType(string s)
         {
             var fields = s.Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries);
+            if (fields.Length < 3)
+            {
+                return;
+            }
+
+            // In case it's a request
             var parsed = Enum.TryParse(fields[0], out _requestType);
+            if (parsed)
+            {
+                _page = fields[1];
+                _version = fields[2] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
+            }
 
-            // Only continue parsing if the request type is valid
-            if (!parsed) return;
-
-            _page = fields[1];
-            _version = fields[2] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
-            _log.Debug(string.Format("HTTP Request: {0}", _requestType));
-            _log.Debug(string.Format("Page: {0}", _page));
-            _log.Debug(string.Format("HTTP Version: {0}", _version));
+            var isResponse = Int32.TryParse(fields[1], out _responseCode);
+            if (isResponse)
+            {
+                _version = fields[0] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
+                _status = fields[2];
+                _log.Debug(s);
+            }    
         }
 
         private void ParseField(string field)
@@ -161,8 +176,6 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
 
                 var result = method.Invoke(this, new object[] {key, value});
                 obj.SetValue(this, result);
-
-                _log.Debug(string.Format("{0}: {1}", key, value));
             }
         }
 

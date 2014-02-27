@@ -50,14 +50,13 @@ namespace NetworkInspector.Models.Packets
                     else if (tcp.SourcePort == 80 || tcp.DestinationPort == 80)
                     {
                         ApplicationHeader = new HTTPHeader(tcp.Data, tcp.MessageLength);
-                        _log.Fatal(NetworkHeader.SourceIP);
                     }
 
                     else
                     {
                         _log.Warn(
                             string.Format(
-                                "Could not detect packet. Source port: {0}\tDestination port: {1} Source IP: {2}",
+                                "Could not detect packet type. Source port: {0}\tDestination port: {1} Source IP: {2}",
                                 tcp.SourcePort, tcp.DestinationPort, NetworkHeader.SourceIP));
                     }
                 }
@@ -75,7 +74,7 @@ namespace NetworkInspector.Models.Packets
                     {
                         _log.Warn(
                             string.Format(
-                                "Could not detect packet. Source port: {0}\tDestination port: {1} Source IP: {2}",
+                                "Could not detect packet type. Source port: {0}\tDestination port: {1} Source IP: {2}",
                                 udp.SourcePort, udp.DestinationPort, NetworkHeader.SourceIP));
                     }
                 }
