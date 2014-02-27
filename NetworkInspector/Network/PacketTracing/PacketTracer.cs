@@ -119,7 +119,7 @@ namespace NetworkInspector.Network.PacketTracing
         {
             var packet = new IPHeader(data, size);
 
-            switch (packet.ProtocolType)
+            switch (packet.UnderlyingProtocol)
             {
                 case Protocol.UDP:
                 {

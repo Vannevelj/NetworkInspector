@@ -76,7 +76,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         // Mainly response fields
         private int _responseCode;
         private string _status;
-#pragma warning restore 649
+#pragma warning restor e 649
 
         public HTTPHeader(byte[] data, int length)
         {
@@ -128,7 +128,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 _version = fields[0] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
                 _status = fields[2];
                 _log.Debug(s);
-            }    
+            }
         }
 
         private void ParseField(string field)

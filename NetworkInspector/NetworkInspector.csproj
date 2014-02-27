@@ -80,6 +80,8 @@
     <Compile Include="Models\Interfaces\IDisplayable.cs" />
     <Compile Include="Models\Interfaces\IHeader.cs" />
     <Compile Include="Models\Packets\Packet.cs" />
+    <Compile Include="Models\Parser\PacketBuilder.cs" />
+    <Compile Include="Models\Parser\ParseResult.cs" />
     <Compile Include="Models\TransferRate.cs" />
     <Compile Include="Network\BandwidthMonitoring\NetworkStatisticsEventArgs.cs" />
     <Compile Include="Models\INetworkStatistics.cs" />

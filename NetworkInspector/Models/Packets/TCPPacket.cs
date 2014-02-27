@@ -18,5 +18,7 @@ namespace NetworkInspector.Models.Packets
             Received = DateTime.Now;
             DetectApplicationHeader(tcp);
         }
+
+        public TCPPacket() { }
     }
 }

@@ -117,7 +117,7 @@ namespace NetworkInspector.Models.Headers.Network
             }
         }
 
-        public Protocol ProtocolType
+        public Protocol UnderlyingProtocol
         {
             get
             {

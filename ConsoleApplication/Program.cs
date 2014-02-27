@@ -122,7 +122,7 @@ namespace ConsoleApplication
             Console.WriteLine("MessageLength:\t\t\t{0}", tcp.NetworkHeader.MessageLength);
             Console.WriteLine("Source IP:\t\t{0}", tcp.NetworkHeader.SourceIP);
             Console.WriteLine("Destination IP:\t\t{0}", tcp.NetworkHeader.DestinationIP);
-            Console.WriteLine("Protocol:\t\t{0}", tcp.NetworkHeader.ProtocolType);
+            Console.WriteLine("Protocol:\t\t{0}", tcp.NetworkHeader.UnderlyingProtocol);
             //Console.WriteLine("Source Port:\t\t{0}", tcp.TransportHeader.SourcePort);
             //Console.WriteLine("Destination Port:\t{0}", tcp.TransportHeader.DestinationPort);
             if (tcp.ApplicationHeader != null)
@@ -140,7 +140,7 @@ namespace ConsoleApplication
             Console.WriteLine("MessageLength:\t\t\t{0}", udp.NetworkHeader.MessageLength);
             Console.WriteLine("Source IP:\t\t{0}", udp.NetworkHeader.SourceIP);
             Console.WriteLine("Destination IP:\t\t{0}", udp.NetworkHeader.DestinationIP);
-            Console.WriteLine("Protocol:\t\t{0}", udp.NetworkHeader.ProtocolType);
+            Console.WriteLine("Protocol:\t\t{0}", udp.NetworkHeader.UnderlyingProtocol);
             //Console.WriteLine("Source Port:\t\t{0}", udp.TransportHeader.SourcePort);
             //Console.WriteLine("Destination Port:\t{0}", udp.TransportHeader.DestinationPort);
             if (udp.ApplicationHeader != null)
