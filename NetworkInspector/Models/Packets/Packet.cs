@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
-using log4net;
 using NetworkInspector.Extensions;
-using NetworkInspector.Models.Headers.Application.DNS;
-using NetworkInspector.Models.Headers.Application.HTTP;
 using NetworkInspector.Models.Headers.Network;
-using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Interfaces;
 
 namespace NetworkInspector.Models.Packets
@@ -24,7 +19,7 @@ namespace NetworkInspector.Models.Packets
 
     public class Packet : IDisplayable
     {
-        public Protocol PacketType { get; set; } 
+        public Protocol PacketType { get; set; }
 
         public IHeader ApplicationHeader { get; set; }
 
@@ -51,7 +46,12 @@ namespace NetworkInspector.Models.Packets
             };
 
             dic.AddRange(NetworkHeader.GetFieldRepresentation());
-            dic.AddRange(TransportHeader.GetFieldRepresentation());
+
+            // Transport protocol might not be supported
+            if (TransportHeader != null)
+            {
+                dic.AddRange(TransportHeader.GetFieldRepresentation());
+            }
 
             // Application protocol might not be supported
             if (ApplicationHeader != null)

@@ -42,7 +42,7 @@ namespace NetworkInspector.Models.Parser
             {
                 _applicationLayer = applicationResult.Header;
             }
-            
+
             return new Packet
             {
                 PacketType = _transportLayer.ProtocolName,
@@ -72,11 +72,6 @@ namespace NetworkInspector.Models.Parser
                 var header = new TCPHeader(data, length);
                 var prot = Protocol.UNKNOWN;
 
-                if (header.SourcePort == 53 || header.DestinationPort == 53)
-                {
-                    prot = Protocol.DNS;
-                }
-
                 if (header.SourcePort == 80 || header.DestinationPort == 80)
                 {
                     prot = Protocol.HTTP;
@@ -85,9 +80,9 @@ namespace NetworkInspector.Models.Parser
                 else
                 {
                     _log.Warn(
-                            string.Format(
-                                "Could not detect application header. Source port: {0}\tDestination port: {1}",
-                                header.SourcePort, header.DestinationPort));
+                        string.Format(
+                            "Could not detect application header. Source port: {0}\tDestination port: {1}",
+                            header.SourcePort, header.DestinationPort));
                 }
 
                 return new ParseResult
@@ -104,22 +99,18 @@ namespace NetworkInspector.Models.Parser
                 var header = new UDPHeader(data, length);
                 var prot = Protocol.UNKNOWN;
 
+                _log.Debug(string.Format("UDP PACKETS SP: {0}\tDP: {1}", header.SourcePort, header.DestinationPort));
+
                 if (header.SourcePort == 53 || header.DestinationPort == 53)
                 {
                     prot = Protocol.DNS;
                 }
-
-                if (header.SourcePort == 80 || header.DestinationPort == 80)
-                {
-                    prot = Protocol.HTTP;
-                }
-
                 else
                 {
                     _log.Warn(
-                            string.Format(
-                                "Could not detect application header. Source port: {0}\tDestination port: {1}",
-                                header.SourcePort, header.DestinationPort));
+                        string.Format(
+                            "Could not detect application header. Source port: {0}\tDestination port: {1}",
+                            header.SourcePort, header.DestinationPort));
                 }
 
                 return new ParseResult
@@ -136,7 +127,10 @@ namespace NetworkInspector.Models.Parser
 
         private ParseResult ParseApplicationHeader(byte[] data, int length, Protocol protocol)
         {
-            if (protocol == Protocol.UNKNOWN) {  return null; }
+            if (protocol == Protocol.UNKNOWN)
+            {
+                return null;
+            }
 
             if (protocol == Protocol.DNS)
             {
@@ -159,7 +153,7 @@ namespace NetworkInspector.Models.Parser
 
             if (protocol == Protocol.HTTP)
             {
-                if (_transportLayer.ProtocolName == Protocol.HTTP)
+                if (_transportLayer.ProtocolName == Protocol.TCP)
                 {
                     var header = new HTTPHeader(data, length);
                     return new ParseResult

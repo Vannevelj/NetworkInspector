@@ -5,8 +5,6 @@ using System.Reflection;
 using log4net;
 using NetFwTypeLib;
 using NetworkInspector.Models.Headers.Application.HTTP;
-using NetworkInspector.Models.Headers.Network;
-using NetworkInspector.Models.Headers.Transport;
 using NetworkInspector.Models.Packets;
 using NetworkInspector.Models.Parser;
 
@@ -124,7 +122,7 @@ namespace NetworkInspector.Network.PacketTracing
             if (packet != null)
             {
                 NotifyObservers(packet);
-            }   
+            }
         }
 
         private void NotifyObservers(Packet p)
