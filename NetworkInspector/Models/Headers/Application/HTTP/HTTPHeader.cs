@@ -122,6 +122,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
                 _version = fields[2] == "HTTP/1.1" ? HttpVersion.Version11 : HttpVersion.Version10;
             }
 
+            // In case it's a response
             var isResponse = Int32.TryParse(fields[1], out _responseCode);
             if (isResponse)
             {
@@ -182,7 +183,7 @@ namespace NetworkInspector.Models.Headers.Application.HTTP
         private void AddCustomHeader(string key, string value)
         {
             _customHeaders.Add(ConversionFactory.Convert<CustomField>(key, value));
-            _log.Debug(string.Format("Custom headers: [{0}]", string.Join(",", _customHeaders)));
+            //_log.Debug(string.Format("Custom headers: [{0}]", string.Join(",", _customHeaders)));
         }
 
         private bool IsCustomHeader(string key)

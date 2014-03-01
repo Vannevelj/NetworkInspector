@@ -77,6 +77,12 @@ namespace NetworkInspector.Models.Parser
                     prot = Protocol.HTTP;
                 }
 
+                if (header.SourcePort == 53 || header.DestinationPort == 53)
+                {
+                    _log.Debug("DNS PACKET FOUND");
+                    prot = Protocol.DNS;
+                }
+
                 else
                 {
                     _log.Warn(
@@ -99,10 +105,16 @@ namespace NetworkInspector.Models.Parser
                 var header = new UDPHeader(data, length);
                 var prot = Protocol.UNKNOWN;
 
+                if (header.SourcePort > 65535 || header.DestinationPort > 65535)
+                {
+                    throw new Exception("Port out of range");
+                }
+
                 _log.Debug(string.Format("UDP PACKETS SP: {0}\tDP: {1}", header.SourcePort, header.DestinationPort));
 
                 if (header.SourcePort == 53 || header.DestinationPort == 53)
                 {
+                    _log.Debug("DNS PACKET FOUND");
                     prot = Protocol.DNS;
                 }
                 else
